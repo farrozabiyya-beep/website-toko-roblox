@@ -188,19 +188,33 @@ function createOrder(username, phone, products, paymentMethod, gamepassLink = ''
     
     const order = {
         id: orderId,
+        orderId: orderId,
         username: username,
+        customer: username,
         phone: phone,
+        whatsapp: phone,
         products: products,
         paymentMethod: paymentMethod,
         gamepassLink: gamepassLink,
         totalPrice: totalPrice,
-        status: 'pending',
-        createdAt: new Date().toISOString()
+        price: totalPrice,
+        status: 'Pending',
+        createdAt: new Date().toISOString(),
+        item: products.map(p => p.name).join(', ')
     };
     
     let orders = JSON.parse(localStorage.getItem('orders')) || [];
     orders.push(order);
     localStorage.setItem('orders', JSON.stringify(orders));
+    
+    // Try to send to Netlify Functions
+    fetch('/.netlify/functions/saveOrder', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(order)
+    }).then(r => r.json())
+      .then(data => console.log('✓ Order sent to Netlify:', data))
+      .catch(err => console.warn('⚠ Netlify error (fallback to localStorage):', err));
     
     return order;
 }

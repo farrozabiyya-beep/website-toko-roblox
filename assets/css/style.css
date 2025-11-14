@@ -159,6 +159,25 @@ section {
     transform: scale(1.05);
 }
 
+.order-link {
+    background-color: var(--accent-color);
+    color: var(--primary-color) !important;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.order-link:hover {
+    background-color: #00e5ff;
+    transform: scale(1.05);
+}
+
+.order-link::after {
+    display: none !important;
+}
+
 .order-link-mobile {
     display: none !important;
     padding: 15px 0 !important;
@@ -917,8 +936,16 @@ section {
         display: none;
     }
 
+    .order-link {
+        display: none !important;
+    }
+
     .order-link-mobile {
         display: block !important;
+        padding: 15px 0 !important;
+        background: none !important;
+        color: var(--white) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
     }
 
     .hero-title {

@@ -233,17 +233,40 @@ Mohon segera diproses. Terima kasih!`;
     // Create order dengan ID yang sudah dibuat
     const createdOrder = {
         id: orderId,
+        orderId: orderId,
         username: username,
+        customer: username,
         item: robuxAmount + ' Robux',
+        totalPrice: parseInt(price),
         price: parseInt(price),
+        phone: whatsapp,
+        whatsapp: whatsapp,
         paymentMethod: paymentMethod.value,
-        status: 'pending',
-        date: new Date().toLocaleDateString('id-ID')
+        status: 'Pending',
+        createdAt: new Date().toISOString(),
+        date: new Date().toLocaleDateString('id-ID'),
+        products: [
+            {
+                id: 'robux-' + robuxAmount,
+                name: robuxAmount + ' Robux',
+                price: parseInt(price),
+                quantity: 1
+            }
+        ]
     };
 
     let orders = JSON.parse(localStorage.getItem('orders')) || [];
     orders.push(createdOrder);
     localStorage.setItem('orders', JSON.stringify(orders));
+    
+    // Send to Netlify Functions
+    fetch('/.netlify/functions/saveOrder', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(createdOrder)
+    }).then(r => r.json())
+      .then(data => console.log('✓ Order sent to Netlify:', data))
+      .catch(err => console.warn('⚠ Netlify error (fallback to localStorage):', err));
     
     // Sync dengan admin panel
     localStorage.setItem('_customerDataUpdate', new Date().getTime().toString());
