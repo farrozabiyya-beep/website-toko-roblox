@@ -820,3 +820,87 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// ========== ADMIN NOTIFICATIONS ==========
+/**
+ * Show notification toast di admin panel
+ */
+function showAdminNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `admin-notification notification-${type}`;
+    
+    const icons = {
+        'success': 'fa-check-circle',
+        'error': 'fa-exclamation-circle',
+        'warning': 'fa-exclamation-triangle',
+        'info': 'fa-info-circle'
+    };
+    
+    const icon = icons[type] || icons['info'];
+    
+    notification.innerHTML = `
+        <i class="fas ${icon}"></i>
+        <span>${message}</span>
+        <button class="close-notification">&times;</button>
+    `;
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        background: ${type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : type === 'warning' ? '#ffc107' : '#00bfff'};
+        color: white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        animation: slideInRight 0.3s ease;
+        font-weight: 500;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Close button handler
+    notification.querySelector('.close-notification').addEventListener('click', () => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    });
+    
+    // Auto remove after 4 seconds
+    setTimeout(() => {
+        if (document.body.contains(notification)) {
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }
+    }, 4000);
+}
+
+// Add CSS animations untuk notifications
+const notificationStyles = document.createElement('style');
+notificationStyles.textContent = `
+    @keyframes slideInRight {
+        from {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(notificationStyles);

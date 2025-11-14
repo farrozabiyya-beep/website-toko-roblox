@@ -339,7 +339,31 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('⚠ Refresh button not found');
     }
 
-    // Listen untuk perubahan di localStorage (dari window/tab lain)
+    // ========== REAL-TIME SYNC LISTENER ==========
+    // Auto-refresh ketika ada update dari sync system
+    if (window.syncManager) {
+        window.addEventListener('sync:orders-changed', (event) => {
+            console.log('🔄 Sync update received, refreshing admin table...');
+            const detail = event.detail;
+            
+            // Update allOrders dari sync data
+            allOrders = detail.orders || [];
+            
+            // Update display
+            displayOrdersInTable();
+            calculateStatistics();
+            displayStatistics();
+            
+            // Show notification
+            if (typeof showAdminNotification === 'function') {
+                showAdminNotification(`📊 Data tersinkronisasi! (${detail.count} orders)`, 'info');
+            }
+        });
+        
+        console.log('✓ Real-time sync listener configured for admin');
+    }
+
+    // Listen untuk localStorage changes (from customer pages)
     window.addEventListener('storage', (e) => {
         if (e.key === 'orders' || e.key === '_adminDataUpdate' || e.key === '_customerDataUpdate') {
             console.log('💾 Storage changed externally, reloading...');
