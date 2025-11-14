@@ -14,6 +14,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Theme Toggle Button -->
+    <button id="themeToggleBtn" style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 999;
+        padding: 12px 16px;
+        background: #0047ab;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 18px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    " title="Toggle Dark Mode">🌙</button>
     <!-- Header -->
     <header class="admin-header">
         <div class="header-content">
@@ -48,6 +64,15 @@
                 </button>
                 <button class="nav-item" data-section="stok-produk">
                     <i class="fas fa-boxes"></i> Stok Produk
+                </button>
+                <button class="nav-item" data-section="customers">
+                    <i class="fas fa-users"></i> Pelanggan
+                </button>
+                <button class="nav-item" data-section="analytics">
+                    <i class="fas fa-chart-bar"></i> Analytics
+                </button>
+                <button class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i> Pengaturan
                 </button>
             </nav>
         </aside>
@@ -261,6 +286,136 @@
                 </div>
                 <div id="stokProdukEmpty" class="empty-state">Belum ada produk</div>
             </section>
+
+            <!-- CUSTOMERS SECTION -->
+            <section id="customers-section" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> Data Pelanggan</h2>
+                    <div class="section-actions">
+                        <input type="text" id="customerSearchInput" placeholder="Cari pelanggan..." style="padding: 8px 12px; border: 1px solid #dee2e6; border-radius: 6px;">
+                        <button id="customerSearchBtn" class="btn-primary"><i class="fas fa-search"></i> Cari</button>
+                        <button id="exportCustomersBtn" class="btn-primary"><i class="fas fa-download"></i> Export</button>
+                    </div>
+                </div>
+
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>No. HP</th>
+                                <th>Total Pesanan</th>
+                                <th>Status</th>
+                                <th>Last Login</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customersTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ANALYTICS SECTION -->
+            <section id="analytics-section" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-chart-bar"></i> Analytics & Laporan</h2>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                    <div class="stat-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 10px; color: white;">
+                        <h3 style="margin: 0 0 15px 0;">Pesanan Pending</h3>
+                        <p id="pending-orders" style="font-size: 2.5rem; margin: 0; font-weight: bold;">0</p>
+                    </div>
+
+                    <div class="stat-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 25px; border-radius: 10px; color: white;">
+                        <h3 style="margin: 0 0 15px 0;">Pesanan Selesai</h3>
+                        <p id="completed-orders" style="font-size: 2.5rem; margin: 0; font-weight: bold;">0</p>
+                    </div>
+
+                    <div class="stat-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 25px; border-radius: 10px; color: white;">
+                        <h3 style="margin: 0 0 15px 0;">Total Pelanggan</h3>
+                        <p id="total-customers" style="font-size: 2.5rem; margin: 0; font-weight: bold;">0</p>
+                    </div>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="margin-top: 0;">Filter Pesanan</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div>
+                            <label>Status</label>
+                            <select id="orderFilterStatus" style="width: 100%; padding: 8px; border: 1px solid #dee2e6; border-radius: 6px;">
+                                <option value="">Semua</option>
+                                <option value="pending">Pending</option>
+                                <option value="diproses">Diproses</option>
+                                <option value="selesai">Selesai</option>
+                                <option value="dibatalkan">Dibatalkan</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Dari Tanggal</label>
+                            <input type="date" id="orderFilterStartDate" style="width: 100%; padding: 8px; border: 1px solid #dee2e6; border-radius: 6px;">
+                        </div>
+                        <div>
+                            <label>Sampai Tanggal</label>
+                            <input type="date" id="orderFilterEndDate" style="width: 100%; padding: 8px; border: 1px solid #dee2e6; border-radius: 6px;">
+                        </div>
+                        <div>
+                            <label>Min Harga</label>
+                            <input type="number" id="orderFilterMinPrice" placeholder="0" style="width: 100%; padding: 8px; border: 1px solid #dee2e6; border-radius: 6px;">
+                        </div>
+                        <div>
+                            <label>Max Harga</label>
+                            <input type="number" id="orderFilterMaxPrice" placeholder="999999" style="width: 100%; padding: 8px; border: 1px solid #dee2e6; border-radius: 6px;">
+                        </div>
+                        <div>
+                            <label>Cari</label>
+                            <input type="text" id="orderFilterSearch" placeholder="ID/Username/Item..." style="width: 100%; padding: 8px; border: 1px solid #dee2e6; border-radius: 6px;">
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <button id="orderFilterBtn" class="btn-primary"><i class="fas fa-filter"></i> Filter</button>
+                        <button class="btn-reset-filter" style="background: #6c757d; color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; margin-left: 10px;"><i class="fas fa-redo"></i> Reset</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SETTINGS SECTION -->
+            <section id="settings-section" class="section" data-permission="admin">
+                <div class="section-header">
+                    <h2><i class="fas fa-cog"></i> Pengaturan & Backup</h2>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="margin-top: 0;">Backup & Restore Data</h3>
+                    <p style="color: #6c757d; margin-bottom: 15px;">Buat backup semua data atau restore dari file backup yang sudah disimpan.</p>
+                    <button id="backupBtn" class="btn-primary" style="margin-right: 10px;">
+                        <i class="fas fa-download"></i> Buat Backup
+                    </button>
+                    <button id="restoreBtn" class="btn-primary" style="background: #6c757d;">
+                        <i class="fas fa-upload"></i> Restore Backup
+                    </button>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="margin-top: 0;">Laporan & Log</h3>
+                    <p style="color: #6c757d; margin-bottom: 15px;">Lihat audit log dan semua aktivitas admin.</p>
+                    <button id="viewAuditLogBtn" class="btn-primary">
+                        <i class="fas fa-list"></i> Lihat Audit Log
+                    </button>
+                </div>
+
+                <div style="background: #e8f4f8; padding: 20px; border-radius: 8px; border-left: 4px solid #0047ab;">
+                    <h3 style="margin-top: 0; color: #0047ab;">💾 Export Laporan</h3>
+                    <p style="color: #333; margin-bottom: 15px;">Export data dalam format CSV untuk analisis lebih lanjut.</p>
+                    <button id="exportOrdersBtn" class="btn-primary" style="margin-right: 10px;">
+                        <i class="fas fa-file-csv"></i> Export Pesanan
+                    </button>
+                    <button id="exportProductsBtn" class="btn-primary" style="margin-right: 10px;">
+                        <i class="fas fa-file-csv"></i> Export Produk
+                    </button>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -428,7 +583,12 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="../auth/admin-auth.js"></script>
+    <script src="../auth/customer-auth.js"></script>
+    <script src="../assets/js/dashboard-stats.js"></script>
+    <script src="../assets/js/data-manager.js"></script>
+    <script src="../assets/js/theme-notification.js"></script>
+    <script src="enhanced-script.js"></script>
     <script src="admin.js"></script>
     <script src="../assets/js/sync-system.js"></script>
 </body>
