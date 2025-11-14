@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produk - DEV ROBLOX SHOP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -28,13 +31,25 @@
                     <a href="product.html" class="nav-link">Product</a>
                     <a href="review.html" class="nav-link">Review</a>
                     <a href="contact.html" class="nav-link">Kontak</a>
-                    <a href="order.html" class="nav-link order-link">
+                    <a href="order.html" class="nav-link order-link desktop-order-link">
+                        <i class="fas fa-shopping-cart"></i> Pesananku
+                    </a>
+                    <a href="order.html" class="nav-link order-link-mobile mobile-order-link">
                         <i class="fas fa-shopping-cart"></i> Pesananku
                     </a>
                 </nav>
             </div>
         </nav>
     </header>
+
+    <!-- Flash Sale Banner -->
+    <div id="flashSaleBanner" class="flash-sale-banner" style="display: none;">
+        <div class="flash-sale-content">
+            <i class="fas fa-fire"></i>
+            <span class="flash-sale-text">FLASH SALE SEDANG BERLANGSUNG!</span>
+            <i class="fas fa-fire"></i>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main class="product-listing-page">
@@ -260,6 +275,8 @@
     <script src="../assets/js/website-features.js"></script>
     <script src="../assets/js/page-loader.js"></script>
     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/website-sync.js"></script>
+    <script src="../assets/js/pages-sync.js"></script>
 </body>
 </html>
 
