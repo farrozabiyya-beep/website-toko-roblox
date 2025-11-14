@@ -505,32 +505,36 @@
             }
         });
 
+        // ========== INITIALIZE PAGE ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            // Clear old order data on first load (prevent confusion with old data)
+            if (!localStorage.getItem('_orderPageCleared')) {
+                localStorage.removeItem('orders');
+                localStorage.setItem('_orderPageCleared', 'true');
+            }
+            
+            // Show initial placeholder - jangan tampilkan data sampai user search
+            resultsContainer.innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-search"></i>
+                    <p>Cari pesanan Anda menggunakan ID, Username, atau Nomor WhatsApp</p>
+                </div>
+            `;
+        });
+
         // ========== REAL-TIME SYNC FROM ADMIN PANEL ==========
         window.addEventListener('storage', (e) => {
             if (e.key === 'orders' || e.key === '_adminDataUpdate') {
-                loadOrders();
+                // Jangan auto-refresh results, biar user yang control via search
+                console.log('📊 Order data updated from admin panel');
             }
         });
-
-        // ========== LOAD ON PAGE LOAD ==========
-        document.addEventListener('DOMContentLoaded', () => {
-            loadOrders();
-        });
-
-        // Show initial message jika tidak ada data saat load
-        if (!localStorage.getItem('orders')) {
-            resultsContainer.innerHTML = `
-                <div class="no-results">
-                    <i class="fas fa-inbox"></i>
-                    <p>Belum ada pesanan ditemukan.</p>
-                </div>
-            `;
-        }
     </script>
     <script src="../assets/js/website-features.js"></script>
     <script src="../assets/js/page-loader.js"></script>
     <script src="../assets/js/website-sync.js"></script>
     <script src="../assets/js/pages-sync.js"></script>
+    <script src="../assets/js/order-page-manager.js"></script>
 </body>
 </html>
 
