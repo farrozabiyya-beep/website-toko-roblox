@@ -141,17 +141,25 @@ function setupModals() {
     modals.forEach(modal => {
         const closeBtn = modal.querySelector('.close');
         if (closeBtn) {
-            closeBtn.addEventListener('click', () => {
-                modal.classList.remove('active');
+            closeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation(); // Prevent event bubbling
+                closeModal(modal);
             });
         }
 
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
-                modal.classList.remove('active');
+                closeModal(modal);
             }
         });
     });
+}
+
+// Helper function to close modal
+function closeModal(modal) {
+    modal.classList.remove('active');
+    modal.style.display = 'none';
 }
 
 // ========== FORM SETUP ==========
@@ -252,7 +260,9 @@ function openPesananModal() {
     document.getElementById('pesananHarga').value = '';
     document.getElementById('pesananStatus').value = 'Pending';
     document.getElementById('pesananWhatsapp').value = '';
-    document.getElementById('pesananModal').classList.add('active');
+    const modal = document.getElementById('pesananModal');
+    modal.classList.add('active');
+    modal.style.display = 'flex';
 }
 
 function editPesanan(index) {
@@ -265,7 +275,9 @@ function editPesanan(index) {
     document.getElementById('pesananHarga').value = order.price || order.totalPrice || '';
     document.getElementById('pesananStatus').value = order.status || 'Pending';
     document.getElementById('pesananWhatsapp').value = order.whatsapp || order.phone || '';
-    document.getElementById('pesananModal').classList.add('active');
+    const modal = document.getElementById('pesananModal');
+    modal.classList.add('active');
+    modal.style.display = 'flex';
 }
 
 function savePesanan() {
@@ -288,7 +300,7 @@ function savePesanan() {
     }
 
     localStorage.setItem('orders', JSON.stringify(pesanan));
-    document.getElementById('pesananModal').classList.remove('active');
+    closeModal(document.getElementById('pesananModal'));
     loadPesanan();
     syncDataToCustomer();
 }
@@ -357,7 +369,9 @@ function openAkunModal() {
     document.getElementById('akunHarga').value = '';
     document.getElementById('akunStok').value = '';
     document.getElementById('akunDeskripsi').value = '';
-    document.getElementById('akunModal').classList.add('active');
+    const modal = document.getElementById('akunModal');
+    modal.classList.add('active');
+    modal.style.display = 'flex';
 }
 
 function editAkun(index) {
@@ -370,7 +384,9 @@ function editAkun(index) {
     document.getElementById('akunHarga').value = account.price || '';
     document.getElementById('akunStok').value = account.stock || '';
     document.getElementById('akunDeskripsi').value = account.description || '';
-    document.getElementById('akunModal').classList.add('active');
+    const modal = document.getElementById('akunModal');
+    modal.classList.add('active');
+    modal.style.display = 'flex';
 }
 
 function saveAkun() {
@@ -394,7 +410,7 @@ function saveAkun() {
     }
 
     localStorage.setItem('robloxAccounts', JSON.stringify(akun));
-    document.getElementById('akunModal').classList.remove('active');
+    closeModal(document.getElementById('akunModal'));
     loadAkun();
     syncDataToCustomer();
 }
@@ -461,7 +477,9 @@ function openPromoModal() {
     document.getElementById('promoKode').value = '';
     document.getElementById('promoDiskon').value = '';
     document.getElementById('promoBerlakuHingga').value = '';
-    document.getElementById('promoModal').classList.add('active');
+    const modal = document.getElementById('promoModal');
+    modal.classList.add('active');
+    modal.style.display = 'flex';
 }
 
 function editPromo(index) {
@@ -472,7 +490,9 @@ function editPromo(index) {
     document.getElementById('promoKode').value = p.code || '';
     document.getElementById('promoDiskon').value = p.discount || '';
     document.getElementById('promoBerlakuHingga').value = p.expiry || '';
-    document.getElementById('promoModal').classList.add('active');
+    const modal = document.getElementById('promoModal');
+    modal.classList.add('active');
+    modal.style.display = 'flex';
 }
 
 function savePromo() {
@@ -492,7 +512,7 @@ function savePromo() {
     }
 
     localStorage.setItem('promos', JSON.stringify(promo));
-    document.getElementById('promoModal').classList.remove('active');
+    closeModal(document.getElementById('promoModal'));
     loadPromo();
     syncDataToCustomer();
 }
@@ -648,7 +668,9 @@ function editFlashSale(index) {
     document.getElementById('flashSaleWaktuMulai').value = sale.waktuMulai;
     document.getElementById('flashSaleWaktuBerakhir').value = sale.waktuBerakhir;
 
-    document.getElementById('flashSaleModal').style.display = 'block';
+    const modal = document.getElementById('flashSaleModal');
+    modal.classList.add('active');
+    modal.style.display = 'flex';
 }
 
 function deleteFlashSale(index) {
@@ -749,7 +771,9 @@ function editStokProduk(productId) {
     document.getElementById('stokProdukNama').value = product.name;
     document.getElementById('stokProdukJumlah').value = stok;
 
-    document.getElementById('stokProdukModal').style.display = 'block';
+    const modal = document.getElementById('stokProdukModal');
+    modal.classList.add('active');
+    modal.style.display = 'flex';
 }
 
 function saveStokProduk(e) {
@@ -763,7 +787,7 @@ function saveStokProduk(e) {
     localStorage.setItem('_adminDataUpdate', new Date().getTime().toString());
 
     document.getElementById('stokProdukForm').reset();
-    document.getElementById('stokProdukModal').style.display = 'none';
+    closeModal(document.getElementById('stokProdukModal'));
     loadStokProduk();
 }
 
@@ -799,7 +823,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             flashSaleForm.reset();
             document.getElementById('flashSaleId').value = '';
-            document.getElementById('flashSaleModal').style.display = 'none';
+            closeModal(document.getElementById('flashSaleModal'));
             loadFlashSale();
         });
     }
@@ -816,7 +840,9 @@ document.addEventListener('DOMContentLoaded', () => {
         addFlashSaleBtn.addEventListener('click', () => {
             document.getElementById('flashSaleId').value = '';
             document.getElementById('flashSaleForm').reset();
-            document.getElementById('flashSaleModal').style.display = 'block';
+            const modal = document.getElementById('flashSaleModal');
+            modal.classList.add('active');
+            modal.style.display = 'flex';
         });
     }
 });
