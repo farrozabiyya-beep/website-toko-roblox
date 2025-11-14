@@ -4,15 +4,15 @@ const ADMIN_PASSWORD = 'devstore1230';
 
 // ========== CHECK LOGIN ON LOAD ==========
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded - script.js');
+    
     // If on login page
     if (document.getElementById('loginForm')) {
+        console.log('Setting up login form');
         setupLoginForm();
     }
-    // If on dashboard page
-    else if (document.getElementById('pesananForm')) {
-        checkAdminLogin();
-        setupDashboard();
-    }
+    // If on dashboard page - DON'T do anything here
+    // enhanced-script.js will handle it
 });
 
 // ========== LOGIN SETUP ==========
@@ -64,31 +64,6 @@ function setupLoginForm() {
             }, 3000);
         }
     });
-}
-
-// ========== CHECK LOGIN ON DASHBOARD ==========
-function checkAdminLogin() {
-    const session = localStorage.getItem('adminSession');
-    
-    if (!session) {
-        console.log('Tidak ada session, redirect ke login');
-        // Belum login - redirect ke login page
-        window.location.href = 'index.html';
-        return;
-    }
-
-    try {
-        const sessionData = JSON.parse(session);
-        const adminUserEl = document.getElementById('adminUser');
-        if (adminUserEl) {
-            adminUserEl.textContent = `Halo, ${sessionData.username}`;
-        }
-        console.log('Session valid:', sessionData.username);
-    } catch (error) {
-        console.error('Error parsing session:', error);
-        localStorage.removeItem('adminSession');
-        window.location.href = 'index.html';
-    }
 }
 
 // ========== LOGOUT ==========

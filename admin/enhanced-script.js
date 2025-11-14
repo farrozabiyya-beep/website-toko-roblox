@@ -1,15 +1,27 @@
 // ========== ENHANCED ADMIN DASHBOARD SCRIPT ==========
 
+// LOGIN CREDENTIALS
+const ADMIN_CREDS = {
+    username: 'devrobloxstore',
+    password: 'devstore1230'
+};
+
 // Check admin login
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded fired');
+    
     // If on login page
     if (document.getElementById('loginForm')) {
+        console.log('Login form detected');
         setupAdminLoginForm();
     }
     // If on dashboard page
     else if (document.getElementById('pesananForm')) {
+        console.log('Dashboard detected - checking login');
         checkAdminLogin();
         setupEnhancedDashboard();
+    } else {
+        console.log('Unknown page');
     }
 });
 
@@ -18,23 +30,35 @@ function setupAdminLoginForm() {
     const form = document.getElementById('loginForm');
     const errorMessage = document.getElementById('errorMessage');
 
+    if (!form) {
+        console.error('Login form not found!');
+        return;
+    }
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value.trim();
 
-        const result = adminAuth.login(username, password);
+        console.log('Login attempt:', { username });
 
-        if (result.success) {
-            NotificationManager.showSuccess('Login berhasil!');
+        if (username === ADMIN_CREDS.username && password === ADMIN_CREDS.password) {
+            console.log('✓ Login berhasil');
+            // Simpan session
+            localStorage.setItem('adminSession', JSON.stringify({
+                username: username,
+                loginTime: new Date().getTime()
+            }));
+            
+            // Redirect ke dashboard
             setTimeout(() => {
                 window.location.href = 'dashboard.html';
-            }, 1000);
+            }, 500);
         } else {
-            errorMessage.textContent = result.message;
+            console.log('✗ Login gagal - credential salah');
+            errorMessage.textContent = 'Username atau Password salah';
             errorMessage.classList.add('show');
-            NotificationManager.showError(result.message);
             setTimeout(() => {
                 errorMessage.classList.remove('show');
             }, 3000);
@@ -44,13 +68,28 @@ function setupAdminLoginForm() {
 
 // ========== CHECK ADMIN LOGIN ==========
 function checkAdminLogin() {
-    if (!adminAuth.isLoggedIn()) {
+    const session = localStorage.getItem('adminSession');
+    console.log('checkAdminLogin - session:', session);
+    
+    if (!session) {
+        console.log('✗ No session found - redirecting to login');
         window.location.href = 'index.html';
         return;
     }
 
-    const session = adminAuth.getSession();
-    document.getElementById('adminUser').textContent = `${session.username} (${session.role})`;
+    try {
+        const sessionData = JSON.parse(session);
+        console.log('✓ Session valid:', sessionData);
+        
+        const adminUser = document.getElementById('adminUser');
+        if (adminUser) {
+            adminUser.textContent = `Halo, ${sessionData.username}`;
+        }
+    } catch (error) {
+        console.error('✗ Error parsing session:', error);
+        localStorage.removeItem('adminSession');
+        window.location.href = 'index.html';
+    }
 
     // Setup theme toggle
     setupThemeToggle();
