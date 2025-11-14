@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang Belanja - DEV ROBLOX SHOP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .cart-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .cart-header h1 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+        }
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .cart-items-section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 80px 1fr 100px 100px 50px;
+            gap: 15px;
+            align-items: center;
+            padding: 20px;
+            background: var(--card-hover);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .cart-item:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .cart-item-details h3 {
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .cart-item-details p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .cart-item-price {
+            text-align: right;
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--input-bg);
+            border-radius: 6px;
+            padding: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        .quantity-control button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px 8px;
+            color: var(--primary-color);
+            font-weight: 700;
+            transition: all 0.2s ease;
+        }
+
+        .quantity-control button:hover {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        .quantity-control input {
+            width: 40px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .cart-item-remove {
+            width: 40px;
+            height: 40px;
+            background: #ff444433;
+            color: #ff4444;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .cart-item-remove:hover {
+            background: #ff4444;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--text-secondary)66;
+        }
+
+        .empty-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .continue-shopping {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .continue-shopping:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px var(--primary-color)33;
+        }
+
+        .cart-summary {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .summary-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .summary-row.total {
+            border-bottom: 2px solid var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+        }
+
+        .summary-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .promo-code-section {
+            margin-bottom: 20px;
+        }
+
+        .promo-input {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .promo-input input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--input-bg);
+            color: var(--text-primary);
+        }
+
+        .promo-input button {
+            padding: 10px 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .promo-input button:hover {
+            background: var(--primary-color);
+            opacity: 0.9;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px var(--primary-color)33;
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .clear-cart-btn {
+            width: 100%;
+            padding: 12px;
+            background: #ff444433;
+            color: #ff4444;
+            border: 2px solid #ff4444;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .clear-cart-btn:hover {
+            background: #ff4444;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .cart-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-summary {
+                position: static;
+            }
+
+            .cart-item {
+                grid-template-columns: 60px 1fr;
+                gap: 10px;
+            }
+
+            .cart-item-image {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .cart-item-price,
+            .quantity-control,
+            .cart-item-remove {
+                grid-column: 2;
+                grid-row: 2;
+                justify-self: start;
+            }
+
+            .cart-item-price {
+                justify-self: start;
+            }
+
+            .quantity-control {
+                justify-self: center;
+            }
+
+            .cart-item-remove {
+                justify-self: end;
+            }
+        }
+
+        .dark-mode .cart-items-section,
+        .dark-mode .cart-summary {
+            background: #1e1e1e;
+        }
+
+        .dark-mode .cart-item {
+            background: #2a2a2a;
+        }
+
+        .dark-mode .promo-input input {
+            background: #2a2a2a;
+            color: white;
+            border-color: #404040;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dan Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="../index.html" title="Kembali ke Beranda">
+                        <img src="../assets/images/logo.jpg" alt="Logo" class="logo-img" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        <span class="logo-text">DEV ROBLOX SHOP</span>
+                    </a>
+                </div>
+
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <nav class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../pages/product.html" class="nav-link">Product</a>
+                    <a href="../pages/review.html" class="nav-link">Review</a>
+                    <a href="../pages/contact.html" class="nav-link">Kontak</a>
+                    <a href="cart.html" class="nav-link order-link desktop-order-link">
+                        <i class="fas fa-shopping-cart"></i> Keranjang
+                        <span id="cartBadge" style="display: none;" class="notification-badge">0</span>
+                    </a>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <div class="cart-container">
+        <div class="cart-header">
+            <h1><i class="fas fa-shopping-cart"></i> Keranjang Belanja</h1>
+        </div>
+
+        <div class="cart-layout">
+            <!-- Cart Items -->
+            <div class="cart-items-section">
+                <div id="cartItemsContainer">
+                    <div class="empty-cart">
+                        <div class="empty-icon"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="empty-text">Keranjang belanja Anda kosong</div>
+                        <a href="../pages/product.html" class="continue-shopping">
+                            <i class="fas fa-shopping-bag"></i> Lanjut Belanja
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="cart-summary">
+                <div class="summary-title">Ringkasan Pesanan</div>
+
+                <!-- Promo Code -->
+                <div class="promo-code-section">
+                    <div class="summary-label" style="margin-bottom: 8px;">Kode Promo</div>
+                    <div class="promo-input">
+                        <input type="text" id="promoCode" placeholder="Masukkan kode promo">
+                        <button onclick="applyPromo()"><i class="fas fa-check"></i></button>
+                    </div>
+                    <div id="promoMessage" style="font-size: 0.85rem; display: none;"></div>
+                </div>
+
+                <!-- Summary Details -->
+                <div class="summary-row">
+                    <span class="summary-label">Subtotal</span>
+                    <span class="summary-value" id="subtotal">Rp0</span>
+                </div>
+
+                <div class="summary-row" id="discountRow" style="display: none;">
+                    <span class="summary-label">Diskon</span>
+                    <span class="summary-value" id="discount" style="color: #00aa00;">-Rp0</span>
+                </div>
+
+                <div class="summary-row">
+                    <span class="summary-label">Pajak (0%)</span>
+                    <span class="summary-value" id="tax">Rp0</span>
+                </div>
+
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="total">Rp0</span>
+                </div>
+
+                <button class="checkout-btn" id="checkoutBtn" onclick="goToCheckout()">
+                    <i class="fas fa-credit-card"></i> Lanjut ke Checkout
+                </button>
+
+                <button class="clear-cart-btn" onclick="clearCart()">
+                    <i class="fas fa-trash"></i> Kosongkan Keranjang
+                </button>
+
+                <a href="../pages/product.html" class="continue-shopping" style="display: block; text-align: center; margin-top: 10px;">
+                    <i class="fas fa-arrow-left"></i> Lanjut Belanja
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/shopping-cart.js"></script>
+    <script src="../assets/js/loading.js"></script>
+    <script>
+        let currentPromoDiscount = 0;
+
+        function renderCart() {
+            const container = document.getElementById('cartItemsContainer');
+            const items = shoppingCart.getItems();
+
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-icon"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="empty-text">Keranjang belanja Anda kosong</div>
+                        <a href="../pages/product.html" class="continue-shopping">
+                            <i class="fas fa-shopping-bag"></i> Lanjut Belanja
+                        </a>
+                    </div>
+                `;
+                updateSummary();
+                return;
+            }
+
+            container.innerHTML = items.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-image">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="cart-item-details">
+                        <h3>${item.name}</h3>
+                        <p>Rp${item.price.toLocaleString('id-ID')}</p>
+                    </div>
+                    <div class="cart-item-price">
+                        Rp${(item.price * item.quantity).toLocaleString('id-ID')}
+                    </div>
+                    <div class="quantity-control">
+                        <button onclick="updateQuantity('${item.id}', ${item.quantity - 1})">−</button>
+                        <input type="number" value="${item.quantity}" readonly>
+                        <button onclick="updateQuantity('${item.id}', ${item.quantity + 1})">+</button>
+                    </div>
+                    <button class="cart-item-remove" onclick="removeFromCart('${item.id}')" title="Hapus">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            updateSummary();
+        }
+
+        function updateQuantity(itemId, newQuantity) {
+            shoppingCart.updateQuantity(itemId, newQuantity);
+            renderCart();
+        }
+
+        function removeFromCart(itemId) {
+            shoppingCart.removeItem(itemId);
+            renderCart();
+        }
+
+        function updateSummary() {
+            const total = shoppingCart.getTotal();
+            const subtotal = total;
+            const discountAmount = subtotal * (currentPromoDiscount / 100);
+            const finalTotal = subtotal - discountAmount;
+
+            document.getElementById('subtotal').textContent = `Rp${subtotal.toLocaleString('id-ID')}`;
+            document.getElementById('total').textContent = `Rp${Math.round(finalTotal).toLocaleString('id-ID')}`;
+
+            if (currentPromoDiscount > 0) {
+                document.getElementById('discountRow').style.display = 'flex';
+                document.getElementById('discount').textContent = `-Rp${Math.round(discountAmount).toLocaleString('id-ID')}`;
+            }
+
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            checkoutBtn.disabled = shoppingCart.isEmpty();
+        }
+
+        function applyPromo() {
+            const code = document.getElementById('promoCode').value.trim().toUpperCase();
+            const message = document.getElementById('promoMessage');
+
+            if (!code) {
+                message.textContent = 'Masukkan kode promo';
+                message.style.color = '#ff4444';
+                message.style.display = 'block';
+                return;
+            }
+
+            // Demo promo codes
+            const promos = {
+                'SAVE10': 10,
+                'SAVE15': 15,
+                'SAVE20': 20,
+                'WELCOME': 5
+            };
+
+            if (promos[code]) {
+                currentPromoDiscount = promos[code];
+                message.textContent = `✓ Diskon ${promos[code]}% berhasil diterapkan!`;
+                message.style.color = '#00aa00';
+                message.style.display = 'block';
+                updateSummary();
+            } else {
+                currentPromoDiscount = 0;
+                message.textContent = '✗ Kode promo tidak valid';
+                message.style.color = '#ff4444';
+                message.style.display = 'block';
+                updateSummary();
+            }
+        }
+
+        function goToCheckout() {
+            if (shoppingCart.isEmpty()) {
+                alert('Keranjang belanja kosong!');
+                return;
+            }
+
+            // Save cart data for checkout page
+            const cartData = {
+                items: shoppingCart.getItems(),
+                subtotal: shoppingCart.getTotal(),
+                discount: currentPromoDiscount,
+                timestamp: Date.now()
+            };
+            localStorage.setItem('checkoutData', JSON.stringify(cartData));
+
+            window.location.href = '../pages/product.html';
+        }
+
+        function clearCart() {
+            if (confirm('Apakah Anda yakin ingin mengosongkan keranjang?')) {
+                shoppingCart.clear();
+                currentPromoDiscount = 0;
+                document.getElementById('promoCode').value = '';
+                renderCart();
+            }
+        }
+
+        // Hamburger menu
+        document.getElementById('hamburger').addEventListener('click', () => {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        // Subscribe to cart changes
+        shoppingCart.subscribe(() => {
+            renderCart();
+        });
+
+        // Initial render
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCart();
+            updateCartBadge();
+        });
+    </script>
+</body>
+</html>

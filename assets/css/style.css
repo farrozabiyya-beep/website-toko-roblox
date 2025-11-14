@@ -1817,3 +1817,49 @@ tr:hover {
         opacity: 1;
     }
 }
+
+/* Notification Badge */
+.notification-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    animation: pulse 2s infinite;
+    box-shadow: 0 2px 8px rgba(255, 68, 68, 0.4);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* Cart Badge */
+#cartBadge {
+    position: relative !important;
+    margin-left: 5px;
+    top: auto !important;
+    right: auto !important;
+}
+
+/* Add position relative to nav links for badges */
+.nav-link {
+    position: relative;
+}
+
+/* Dark mode support for badges */
+.dark-mode .notification-badge {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);
+}

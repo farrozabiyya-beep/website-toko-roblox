@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syarat & Ketentuan - DEV ROBLOX SHOP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .legal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .legal-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .legal-header h1 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .legal-header p {
+            color: var(--text-secondary);
+        }
+
+        .legal-content {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            line-height: 1.8;
+        }
+
+        .legal-content h2 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .legal-content h3 {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .legal-content p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .legal-content ul, .legal-content ol {
+            color: var(--text-secondary);
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .legal-content li {
+            margin-bottom: 10px;
+        }
+
+        .important-box {
+            background: var(--primary-color)11;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .important-box strong {
+            color: var(--primary-color);
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--border-color);
+            background: transparent;
+            color: var(--text-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover,
+        .tab-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .last-updated {
+            text-align: right;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .legal-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .legal-content {
+                padding: 20px;
+            }
+
+            .tab-buttons {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                width: 100%;
+            }
+        }
+
+        .dark-mode .legal-content {
+            background: #1e1e1e;
+        }
+
+        .dark-mode .important-box {
+            background: var(--primary-color)22;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dan Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="../index.html" title="Kembali ke Beranda">
+                        <img src="../assets/images/logo.jpg" alt="Logo" class="logo-img" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        <span class="logo-text">DEV ROBLOX SHOP</span>
+                    </a>
+                </div>
+
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <nav class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../pages/product.html" class="nav-link">Product</a>
+                    <a href="../pages/review.html" class="nav-link">Review</a>
+                    <a href="../pages/contact.html" class="nav-link">Kontak</a>
+                    <a href="../pages/order.html" class="nav-link order-link desktop-order-link">
+                        <i class="fas fa-shopping-cart"></i> Pesananku
+                    </a>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <div class="legal-container">
+        <div class="legal-header">
+            <h1><i class="fas fa-file-contract"></i> Syarat & Ketentuan</h1>
+            <p>Harap baca dengan seksama sebelum menggunakan layanan kami</p>
+        </div>
+
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="switchTab('terms', this)">
+                <i class="fas fa-list"></i> Syarat & Ketentuan
+            </button>
+            <button class="tab-btn" onclick="switchTab('privacy', this)">
+                <i class="fas fa-shield-alt"></i> Kebijakan Privasi
+            </button>
+            <button class="tab-btn" onclick="switchTab('refund', this)">
+                <i class="fas fa-undo"></i> Kebijakan Pengembalian
+            </button>
+        </div>
+
+        <!-- Terms & Conditions -->
+        <div class="tab-content active" id="terms">
+            <div class="legal-content">
+                <h2><i class="fas fa-list"></i> Syarat & Ketentuan Penggunaan</h2>
+
+                <h3>1. Penerimaan Syarat</h3>
+                <p>Dengan mengakses dan menggunakan website DEV ROBLOX SHOP (selanjutnya disebut "Layanan"), Anda menyetujui untuk terikat oleh semua syarat dan ketentuan yang tercantum di halaman ini.</p>
+
+                <h3>2. Lisensi Penggunaan</h3>
+                <p>DEV ROBLOX SHOP memberikan Anda lisensi terbatas, non-eksklusif, tidak dapat dialihkan, dan dapat dibatalkan untuk menggunakan Layanan kami untuk keperluan pribadi dan non-komersial.</p>
+
+                <h3>3. Akun Pengguna</h3>
+                <ul>
+                    <li>Anda bertanggung jawab untuk mempertahankan kerahasiaan informasi akun Anda</li>
+                    <li>Anda setuju untuk tidak membagikan akun Anda dengan orang lain</li>
+                    <li>Semua aktivitas yang terjadi di akun Anda adalah tanggung jawab Anda</li>
+                    <li>Anda harus berusia minimal 13 tahun untuk menggunakan Layanan kami</li>
+                </ul>
+
+                <h3>4. Produk dan Layanan</h3>
+                <ul>
+                    <li>Semua produk dan harga dapat berubah tanpa pemberitahuan sebelumnya</li>
+                    <li>Kami berhak untuk menolak atau membatalkan pesanan kapan saja</li>
+                    <li>Deskripsi produk disediakan sesuai apa adanya tanpa jaminan</li>
+                    <li>Ketersediaan stok tidak dijamin</li>
+                </ul>
+
+                <h3>5. Pembayaran</h3>
+                <ul>
+                    <li>Pembayaran harus diselesaikan sebelum pesanan diproses</li>
+                    <li>Semua transaksi bersifat final dan tidak dapat diubah</li>
+                    <li>Biaya tambahan dari e-wallet tidak termasuk dalam harga kami</li>
+                    <li>Anda bertanggung jawab untuk semua biaya yang dikenakan oleh bank atau penyedia layanan pembayaran</li>
+                </ul>
+
+                <div class="important-box">
+                    <strong><i class="fas fa-exclamation-triangle"></i> Perhatian:</strong>
+                    <p>DEV ROBLOX SHOP tidak menyimpan informasi kartu kredit atau data pembayaran sensitif lainnya. Semua pembayaran diproses melalui penyedia layanan pembayaran resmi.</p>
+                </div>
+
+                <h3>6. Pengiriman dan Proses</h3>
+                <ul>
+                    <li>Pesanan biasanya diproses dalam 1-24 jam kerja</li>
+                    <li>Waktu pengiriman adalah perkiraan dan tidak dijamin</li>
+                    <li>Kami tidak bertanggung jawab atas keterlambatan yang disebabkan oleh faktor eksternal</li>
+                    <li>Untuk Robux dan item digital, pengiriman dilakukan langsung ke akun Roblox Anda</li>
+                </ul>
+
+                <h3>7. Pembatasan Tanggung Jawab</h3>
+                <p>DEV ROBLOX SHOP tidak bertanggung jawab atas:</p>
+                <ul>
+                    <li>Kerugian tidak langsung, insidental, atau konsekuensial</li>
+                    <li>Kehilangan data atau profit</li>
+                    <li>Kerusakan reputasi</li>
+                    <li>Masalah yang disebabkan oleh kelalaian pengguna</li>
+                </ul>
+
+                <h3>8. Larangan Penggunaan</h3>
+                <p>Anda tidak diperbolehkan untuk:</p>
+                <ul>
+                    <li>Menggunakan Layanan untuk tujuan ilegal atau tidak sah</li>
+                    <li>Melakukan fraud atau penipuan</li>
+                    <li>Menggunakan script atau bot otomatis</li>
+                    <li>Mengakses atau mencoba mengakses data pengguna lain</li>
+                    <li>Melakukan DDoS atau serangan cyber lainnya</li>
+                    <li>Membagikan akun atau credential dengan orang lain</li>
+                </ul>
+
+                <h3>9. Perubahan Layanan</h3>
+                <p>DEV ROBLOX SHOP berhak untuk mengubah atau menghentikan Layanan kapan saja tanpa pemberitahuan sebelumnya.</p>
+
+                <h3>10. Perubahan Syarat</h3>
+                <p>Kami dapat mengubah syarat dan ketentuan ini kapan saja. Perubahan akan berlaku segera setelah diposting di website.</p>
+
+                <h3>11. Konten Pengguna</h3>
+                <ul>
+                    <li>Anda mempertahankan hak kepemilikan konten yang Anda buat</li>
+                    <li>Dengan mengirim konten, Anda memberikan kami izin untuk menggunakan, memodifikasi, dan mendistribusikan konten tersebut</li>
+                    <li>Kami tidak bertanggung jawab atas konten pengguna</li>
+                </ul>
+
+                <h3>12. Link Eksternal</h3>
+                <p>Website kami mungkin berisi link ke website pihak ketiga. Kami tidak bertanggung jawab atas konten atau kebijakan privasi website tersebut.</p>
+
+                <h3>13. Hukum yang Berlaku</h3>
+                <p>Syarat dan ketentuan ini diatur oleh hukum Negara Kesatuan Republik Indonesia.</p>
+
+                <h3>14. Hubungi Kami</h3>
+                <p>Jika Anda memiliki pertanyaan tentang Syarat & Ketentuan ini, silakan hubungi kami melalui WhatsApp: +62 812-1447-7714</p>
+
+                <div class="last-updated">
+                    <p><strong>Terakhir diperbarui:</strong> 14 November 2024</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Policy -->
+        <div class="tab-content" id="privacy">
+            <div class="legal-content">
+                <h2><i class="fas fa-shield-alt"></i> Kebijakan Privasi</h2>
+
+                <h3>1. Pendahuluan</h3>
+                <p>DEV ROBLOX SHOP berkomitmen untuk melindungi privasi Anda. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda.</p>
+
+                <h3>2. Informasi yang Kami Kumpulkan</h3>
+                <p>Kami mengumpulkan informasi berikut:</p>
+                <ul>
+                    <li><strong>Informasi Akun:</strong> Username, email, password, nomor WhatsApp, nama lengkap</li>
+                    <li><strong>Informasi Pesanan:</strong> Username Roblox, produk yang dibeli, harga, metode pembayaran</li>
+                    <li><strong>Informasi Teknis:</strong> Alamat IP, browser, perangkat, log akses</li>
+                    <li><strong>Informasi Komunikasi:</strong> Pesan dari customer service, review, feedback</li>
+                </ul>
+
+                <h3>3. Bagaimana Kami Menggunakan Informasi</h3>
+                <ul>
+                    <li>Untuk memproses pesanan dan memberikan layanan</li>
+                    <li>Untuk mengkomunikasikan status pesanan</li>
+                    <li>Untuk meningkatkan kualitas layanan</li>
+                    <li>Untuk mencegah fraud dan penyalahgunaan</li>
+                    <li>Untuk membuat laporan dan analitik</li>
+                </ul>
+
+                <h3>4. Perlindungan Data</h3>
+                <p>Kami menggunakan teknik keamanan industri standar untuk melindungi data Anda:</p>
+                <ul>
+                    <li>Enkripsi data dalam transit (HTTPS)</li>
+                    <li>Kontrol akses ketat</li>
+                    <li>Audit keamanan reguler</li>
+                    <li>Password hashing yang aman</li>
+                </ul>
+
+                <div class="important-box">
+                    <strong><i class="fas fa-info-circle"></i> Catatan:</strong>
+                    <p>Kami tidak pernah menyimpan informasi sensitif seperti nomor kartu kredit atau token pembayaran secara langsung. Semua pembayaran diproses oleh penyedia layanan pembayaran pihak ketiga yang aman.</p>
+                </div>
+
+                <h3>5. Berbagi Data</h3>
+                <p>Kami tidak menjual atau membagikan informasi pribadi Anda kepada pihak ketiga kecuali:</p>
+                <ul>
+                    <li>Untuk memenuhi persyaratan hukum</li>
+                    <li>Dengan penyedia layanan yang membantu kami menjalankan bisnis (dengan perjanjian kerahasiaan)</li>
+                    <li>Dengan persetujuan eksplisit Anda</li>
+                </ul>
+
+                <h3>6. Cookie dan Tracking</h3>
+                <p>Website kami menggunakan cookie untuk:</p>
+                <ul>
+                    <li>Mempertahankan sesi login Anda</li>
+                    <li>Menyimpan preferensi tema (dark/light mode)</li>
+                    <li>Menganalisis penggunaan website</li>
+                </ul>
+
+                <h3>7. Hak Pengguna</h3>
+                <p>Anda memiliki hak untuk:</p>
+                <ul>
+                    <li>Mengakses data pribadi Anda</li>
+                    <li>Mengubah data pribadi Anda</li>
+                    <li>Menghapus akun dan semua data terkait</li>
+                    <li>Menarik persetujuan kapan saja</li>
+                </ul>
+
+                <h3>8. Retensi Data</h3>
+                <p>Kami menyimpan data Anda selama diperlukan untuk menyediakan layanan. Data akan dihapus setelah akun dihapus, kecuali kami diperlukan untuk mempertahankannya untuk tujuan hukum atau bisnis yang sah.</p>
+
+                <h3>9. Perubahan Kebijakan Privasi</h3>
+                <p>Kami dapat mengubah Kebijakan Privasi ini kapan saja. Perubahan akan berlaku segera setelah diposting.</p>
+
+                <h3>10. Hubungi Kami</h3>
+                <p>Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini atau ingin mengakses data Anda, silakan hubungi kami melalui WhatsApp: +62 812-1447-7714</p>
+
+                <div class="last-updated">
+                    <p><strong>Terakhir diperbarui:</strong> 14 November 2024</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Refund Policy -->
+        <div class="tab-content" id="refund">
+            <div class="legal-content">
+                <h2><i class="fas fa-undo"></i> Kebijakan Pengembalian Dana</h2>
+
+                <h3>1. Pengembalian Dana Otomatis</h3>
+                <p>Kami akan memberikan pengembalian dana otomatis dalam kasus berikut:</p>
+                <ul>
+                    <li>Pesanan tidak selesai dalam waktu 48 jam sejak pembayaran dikonfirmasi</li>
+                    <li>Terdapat kesalahan teknis yang menyebabkan pesanan gagal</li>
+                    <li>Akun Roblox tidak ditemukan atau invalid</li>
+                    <li>Pembayaran duplikat</li>
+                </ul>
+
+                <h3>2. Proses Permintaan Pengembalian Dana</h3>
+                <ol>
+                    <li>Hubungi customer service melalui WhatsApp dengan ID pesanan</li>
+                    <li>Berikan bukti pembayaran dan detail pesanan</li>
+                    <li>Tim kami akan memverifikasi klaim Anda dalam 24 jam</li>
+                    <li>Jika disetujui, pengembalian dana akan diproses dalam 3-5 hari kerja</li>
+                </ol>
+
+                <h3>3. Pesanan yang Tidak Dapat Dikembalikan</h3>
+                <ul>
+                    <li>Pesanan yang sudah selesai dan item sudah diterima</li>
+                    <li>Pesanan yang dibatalkan oleh pengguna setelah 24 jam</li>
+                    <li>Pesanan yang dibeli dengan biaya admin dari e-wallet (biaya admin tidak dikembalikan)</li>
+                </ul>
+
+                <h3>4. Pengembalian Dana Parsial</h3>
+                <p>Jika Anda menerima sebagian dari item yang dipesan, kami akan memberikan pengembalian dana untuk bagian yang tidak diterima.</p>
+
+                <h3>5. Waktu Pemrosesan</h3>
+                <ul>
+                    <li>Verifikasi: 1-24 jam</li>
+                    <li>Pemrosesan pengembalian dana: 3-5 hari kerja</li>
+                    <li>Kembali ke rekening Anda: 1-3 hari kerja tergantung bank</li>
+                </ul>
+
+                <div class="important-box">
+                    <strong><i class="fas fa-exclamation-triangle"></i> Catatan Penting:</strong>
+                    <p>Biaya admin yang dikenakan oleh e-wallet Anda tidak dapat dikembalikan. Kami hanya mengembalikan jumlah pembelian produk.</p>
+                </div>
+
+                <h3>6. Kasus Khusus</h3>
+                <p>Untuk kasus yang tidak tercakup dalam kebijakan ini, silakan hubungi customer service kami. Kami akan mengevaluasi setiap kasus secara individual dan memberikan solusi terbaik.</p>
+
+                <h3>7. Perselisihan Pembayaran</h3>
+                <ul>
+                    <li>Jika ada perselisihan tentang pembayaran, hubungi kami terlebih dahulu</li>
+                    <li>Kami akan menyelidiki dan merespons dalam 48 jam</li>
+                    <li>Jika tidak puas, Anda dapat mengajukan klaim kepada penyedia e-wallet</li>
+                </ul>
+
+                <h3>8. Hubungi Customer Service</h3>
+                <p><strong>WhatsApp:</strong> +62 812-1447-7714</p>
+                <p><strong>Jam Operasional:</strong> 08:00 - 21:00 WIB, Senin - Minggu</p>
+
+                <div class="last-updated">
+                    <p><strong>Terakhir diperbarui:</strong> 14 November 2024</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/loading.js"></script>
+    <script>
+        function switchTab(tabName, button) {
+            // Remove active class from all tabs and buttons
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Add active class to selected tab and button
+            document.getElementById(tabName).classList.add('active');
+            button.classList.add('active');
+        }
+
+        // Hamburger menu
+        document.getElementById('hamburger').addEventListener('click', () => {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
