@@ -1,7 +1,7 @@
 # Netlify Configuration
 
 [build]
-  command = "echo 'Build complete'"
+  command = "npm run build"
   functions = "netlify/functions"
   publish = "."
 

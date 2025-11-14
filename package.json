@@ -5,8 +5,9 @@
   "main": "index.html",
   "scripts": {
     "start": "netlify dev",
-    "build": "echo 'Static site - no build needed'",
-    "deploy": "netlify deploy --prod"
+    "build": "echo 'Building website...'",
+    "deploy": "netlify deploy --prod",
+    "postbuild": "echo 'Build completed successfully!'"
   },
   "keywords": [
     "roblox",
