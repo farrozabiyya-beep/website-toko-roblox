@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak - DEV ROBLOX SHOP</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="../index.html" title="Kembali ke Beranda">
+                        <img src="../assets/images/logo.jpg" alt="Logo" class="logo-img" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        <span class="logo-text">DEV ROBLOX SHOP</span>
+                    </a>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <nav class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="product.html" class="nav-link">Product</a>
+                    <a href="review.html" class="nav-link">Review</a>
+                    <a href="contact.html" class="nav-link">Kontak</a>
+                    <a href="order.html" class="nav-link order-link-mobile">
+                        <i class="fas fa-shopping-cart"></i> Pesananku
+                    </a>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="contact-page">
+        <div class="container">
+            <h1 class="page-title">Hubungi Kami</h1>
+            <p class="page-subtitle">Halaman kontak ini bertujuan menghubungi kami untuk memberikan sebuah laporan atau menanyakan kepada kami</p>
+
+            <div class="contact-grid">
+                <!-- WhatsApp -->
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p>Chat langsung dengan kami via WhatsApp</p>
+                    <a href="https://wa.me/6281214477714" class="btn btn-primary" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Hubungi di WhatsApp
+                    </a>
+                </div>
+
+                <!-- Instagram DM -->
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h3>Instagram</h3>
+                    <p>Kirim DM kepada kami di Instagram</p>
+                    <a href="https://www.instagram.com/devrobloxshop_/?igsh=MXh1eWZyYWUxeGR5Ng%3D%3D&utm_source=qr" class="btn btn-primary" target="_blank">
+                        <i class="fab fa-instagram"></i> Kunjungi Instagram
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="contact-info-section">
+                <h2>Informasi Kontak</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <i class="fas fa-phone"></i>
+                        <h4>Telepon</h4>
+                        <p>+62 812-1447-7714</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-user"></i>
+                        <h4>Owner</h4>
+                        <p>Dev Roblox Shop</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-clock"></i>
+                        <h4>Jam Operasional</h4>
+                        <p>24 Jam Siap Melayani</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        .contact-page {
+            min-height: calc(100vh - 200px);
+            padding: 60px 20px;
+            background: linear-gradient(135deg, rgba(0, 31, 63, 0.02), rgba(0, 71, 171, 0.02));
+        }
+
+        .page-title {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            opacity: 0.8;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 31, 63, 0.08);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 40px rgba(0, 191, 255, 0.15);
+        }
+
+        .contact-icon {
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .contact-card h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-card p {
+            color: var(--dark-gray);
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .contact-info-section {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 31, 63, 0.08);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-info-section h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .info-card {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(0, 71, 171, 0.05), rgba(0, 191, 255, 0.05));
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 31, 63, 0.1);
+        }
+
+        .info-card i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .info-card h4 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            color: var(--dark-gray);
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.8rem;
+            }
+
+            .contact-info-section {
+                padding: 20px;
+            }
+
+            .contact-info-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>DEV ROBLOX SHOP</h4>
+                    <p>Penyedia kebutuhan Roblox terpercaya dan berkualitas</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Beranda</a></li>
+                        <li><a href="product.html">Produk</a></li>
+                        <li><a href="review.html">Review</a></li>
+                        <li><a href="contact.html">Kontak</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DEV ROBLOX SHOP. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Profile -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Menu Profil</h2>
+            <a href="order.html" class="modal-link">
+                <i class="fas fa-shopping-cart"></i> Pesanan Saya
+            </a>
+        </div>
+    </div>
+
+    <script src="../assets/js/website-features.js"></script>
+    <script src="../assets/js/page-loader.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

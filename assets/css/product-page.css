@@ -1,0 +1,554 @@
+/* ============ PRODUCT PAGE STYLES ============ */
+
+.page-title {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    animation: fadeInUp 0.6s ease;
+    margin-top: 40px;
+}
+
+.product-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 31, 63, 0.1);
+    margin-bottom: 60px;
+}
+
+.product-form {
+    width: 100%;
+}
+
+/* ============ FORM SECTIONS ============ */
+.form-section {
+    margin-bottom: 30px;
+    background: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.form-section h3 {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-section h3 i {
+    color: var(--secondary-color);
+    font-size: 1.3rem;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--dark-gray);
+    font-weight: 600;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--light-gray);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: var(--transition);
+    font-family: inherit;
+    background: var(--white);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(0, 71, 171, 0.1);
+}
+
+.form-control::placeholder {
+    color: #999;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* ============ ROBUX/PRODUCT ITEMS ============ */
+.robux-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.robux-item {
+    position: relative;
+    padding: 15px;
+    border: 2px solid var(--light-gray);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--white);
+}
+
+.robux-item:hover {
+    border-color: var(--secondary-color);
+    background: rgba(0, 71, 171, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 71, 171, 0.1);
+}
+
+.robux-item.active {
+    border-color: var(--secondary-color);
+    background: rgba(0, 71, 171, 0.05);
+}
+
+.robux-item input[type="radio"] {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    accent-color: var(--secondary-color);
+    z-index: 10;
+}
+
+.robux-item input[type="radio"]:checked ~ .robux-icon,
+.robux-item input[type="radio"]:checked ~ .robux-info {
+    color: var(--secondary-color);
+}
+
+.robux-icon {
+    font-size: 2rem;
+    color: var(--accent-color);
+    min-width: 50px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.robux-info {
+    flex: 1;
+    transition: var(--transition);
+}
+
+.robux-amount {
+    display: block;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.robux-price {
+    display: block;
+    color: var(--secondary-color);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.robux-radio {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+/* ============ PAYMENT OPTIONS ============ */
+.payment-options {
+    display: grid;
+    gap: 12px;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border: 2px solid var(--light-gray);
+    border-radius: 10px;
+    cursor: pointer;
+    background: var(--white);
+}
+
+/* Hover effect removed - payment cards stay static */
+
+.payment-option input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 15px;
+    accent-color: var(--secondary-color);
+}
+
+.payment-option input[type="radio"]:checked {
+    accent-color: var(--secondary-color);
+}
+
+.payment-option-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.payment-option-content i {
+    font-size: 1.3rem;
+    color: var(--secondary-color);
+}
+
+.payment-option-content span {
+    color: var(--dark-gray);
+    font-weight: 500;
+}
+
+/* ============ ACTION BUTTONS ============ */
+.form-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    width: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 71, 171, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: var(--light-gray);
+    color: var(--dark-gray);
+}
+
+.btn-secondary:hover {
+    background: #ddd;
+    transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btn.loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--white);
+    animation: spin 1s linear infinite;
+}
+
+/* ============ INFO BOX ============ */
+.info-box {
+    background: rgba(0, 191, 255, 0.1);
+    border-left: 4px solid var(--accent-color);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+}
+
+.info-box i {
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.info-box p {
+    color: var(--dark-gray);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.info-box a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.info-box a:hover {
+    text-decoration: underline;
+}
+
+/* ============ MODAL ACTIONS ============ */
+.payment-method-display {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(0, 71, 171, 0.05);
+    border-radius: 10px;
+}
+
+.payment-method-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.payment-method-display h4 {
+    color: var(--primary-color);
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.modal-actions .btn {
+    flex: 1;
+    max-width: 200px;
+}
+
+/* ============ USERNAME CHECK ============ */
+.username-input-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+.username-input-wrapper .form-control {
+    flex: 1;
+}
+
+.btn-check {
+    padding: 12px 20px;
+    background: linear-gradient(90deg, var(--accent-color), #00d4ff);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.btn-check:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 191, 255, 0.3);
+}
+
+.btn-check:active {
+    transform: translateY(0);
+}
+
+.username-status {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.username-status.valid {
+    color: #10b981;
+}
+
+.username-status.invalid {
+    color: #ef4444;
+}
+
+.avatar-container {
+    margin-top: 20px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(0, 191, 255, 0.1), rgba(0, 71, 171, 0.1));
+    border-radius: 10px;
+    text-align: center;
+    border: 2px dashed var(--accent-color);
+    display: none;
+}
+
+.avatar-container img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    box-shadow: 0 5px 15px rgba(0, 31, 63, 0.2);
+}
+
+.avatar-container p {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.form-section {
+    animation: fadeInUp 0.6s ease backwards;
+    animation-delay: calc(0.1s * var(--index, 0));
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    .product-container {
+        padding: 20px;
+        margin: 0 10px;
+    }
+
+    .form-section {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .form-section h3 {
+        font-size: 1.1rem;
+    }
+
+    .robux-items {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+    }
+
+    .modal-actions .btn {
+        max-width: 100%;
+    }
+
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .product-container {
+        padding: 15px;
+        margin: 0;
+    }
+
+    .form-section {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+
+    .form-section h3 {
+        font-size: 1rem;
+        gap: 8px;
+    }
+
+    .form-section h3 i {
+        font-size: 1.1rem;
+    }
+
+    .robux-item {
+        padding: 12px;
+    }
+
+    .robux-icon {
+        font-size: 1.5rem;
+        min-width: 40px;
+    }
+
+    .robux-amount {
+        font-size: 0.95rem;
+    }
+
+    .robux-price {
+        font-size: 1rem;
+    }
+
+    .form-control {
+        padding: 10px 12px;
+        font-size: 16px;
+    }
+
+    .btn {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+}

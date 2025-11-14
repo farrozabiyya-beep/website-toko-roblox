@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review - DEV ROBLOX SHOP</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="../index.html" title="Kembali ke Beranda">
+                        <img src="../assets/images/logo.jpg" alt="Logo" class="logo-img" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        <span class="logo-text">DEV ROBLOX SHOP</span>
+                    </a>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <nav class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="product.html" class="nav-link">Product</a>
+                    <a href="review.html" class="nav-link">Review</a>
+                    <a href="contact.html" class="nav-link">Kontak</a>
+                    <a href="order.html" class="nav-link order-link-mobile">
+                        <i class="fas fa-shopping-cart"></i> Pesananku
+                    </a>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="review-page">
+        <div class="container">
+            <h1 class="page-title">Ulasan Pelanggan</h1>
+            <p class="page-subtitle">Tuliskan rating, kritik, dan saran dari Anda untuk kami</p>
+
+            <div class="review-container">
+                <!-- Form Review -->
+                <div class="review-form-section">
+                    <h2>Berikan Ulasan Anda</h2>
+                    <form class="review-form" id="reviewForm">
+                        <div class="form-group">
+                            <label class="form-label">Nama (Opsional)</label>
+                            <input type="text" class="form-control" id="reviewName" placeholder="Nama Anda">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Pesan Ulasan</label>
+                            <textarea class="form-control" id="reviewMessage" placeholder="Tuliskan pengalaman Anda dengan layanan kami..." required rows="5"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Rating</label>
+                            <div class="star-rating" id="starRating">
+                                <i class="fas fa-star" data-value="1"></i>
+                                <i class="fas fa-star" data-value="2"></i>
+                                <i class="fas fa-star" data-value="3"></i>
+                                <i class="fas fa-star" data-value="4"></i>
+                                <i class="fas fa-star" data-value="5"></i>
+                            </div>
+                            <input type="hidden" id="ratingValue" required>
+                            <span id="ratingText" class="rating-text">Berapa bintang yang ingin Anda berikan?</span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-send"></i> Kirim Ulasan
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Reviews Display -->
+                <div class="reviews-display-section">
+                    <h2>Ulasan dari Pelanggan Lainnya</h2>
+                    <div class="reviews-list" id="reviewsList"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        .review-page {
+            min-height: calc(100vh - 200px);
+            padding: 60px 20px;
+            background: linear-gradient(135deg, rgba(0, 31, 63, 0.02), rgba(0, 71, 171, 0.02));
+        }
+
+        .page-title {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            opacity: 0.8;
+        }
+
+        .review-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .review-form-section,
+        .reviews-display-section {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 31, 63, 0.08);
+        }
+
+        .review-form-section h2,
+        .reviews-display-section h2 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .star-rating i {
+            font-size: 2.5rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .star-rating i:hover,
+        .star-rating i.active {
+            color: var(--warning-color);
+            transform: scale(1.15);
+        }
+
+        .rating-text {
+            display: block;
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .review-item {
+            padding: 20px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(0, 71, 171, 0.02), rgba(0, 191, 255, 0.02));
+            transition: var(--transition);
+        }
+
+        .review-item:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 5px 15px rgba(0, 191, 255, 0.1);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .review-name {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .review-rating {
+            display: flex;
+            gap: 3px;
+        }
+
+        .review-rating i {
+            color: var(--warning-color);
+            font-size: 0.9rem;
+        }
+
+        .review-message {
+            color: var(--dark-gray);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .review-date {
+            color: #999;
+            font-size: 0.85rem;
+        }
+
+        .no-reviews {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--dark-gray);
+        }
+
+        .no-reviews i {
+            font-size: 3rem;
+            color: var(--light-gray);
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 1024px) {
+            .review-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.8rem;
+            }
+
+            .review-form-section,
+            .reviews-display-section {
+                padding: 20px;
+            }
+
+            .review-container {
+                gap: 20px;
+            }
+        }
+    </style>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>DEV ROBLOX SHOP</h4>
+                    <p>Penyedia kebutuhan Roblox terpercaya dan berkualitas</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Beranda</a></li>
+                        <li><a href="product.html">Produk</a></li>
+                        <li><a href="review.html">Review</a></li>
+                        <li><a href="contact.html">Kontak</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DEV ROBLOX SHOP. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Profile -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Menu Profil</h2>
+            <a href="order.html" class="modal-link">
+                <i class="fas fa-shopping-cart"></i> Pesanan Saya
+            </a>
+            <a href="admin/login.html" class="modal-link">
+                <i class="fas fa-lock"></i> Admin Panel
+            </a>
+        </div>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script>
+        const starRating = document.getElementById('starRating');
+        const ratingValue = document.getElementById('ratingValue');
+        const ratingText = document.getElementById('ratingText');
+        const reviewForm = document.getElementById('reviewForm');
+
+        // Star Rating
+        document.querySelectorAll('.star-rating i').forEach(star => {
+            star.addEventListener('click', () => {
+                const value = star.getAttribute('data-value');
+                ratingValue.value = value;
+                updateStarDisplay(value);
+                ratingText.textContent = `Anda memberikan rating ${value} bintang`;
+            });
+
+            star.addEventListener('mouseover', () => {
+                const value = star.getAttribute('data-value');
+                updateStarDisplay(value);
+            });
+        });
+
+        starRating.addEventListener('mouseout', () => {
+            const value = ratingValue.value;
+            if (value) {
+                updateStarDisplay(value);
+            }
+        });
+
+        function updateStarDisplay(value) {
+            document.querySelectorAll('.star-rating i').forEach(star => {
+                const starValue = star.getAttribute('data-value');
+                if (starValue <= value) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        // Form Submission
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('reviewName').value.trim() || 'Anonim';
+            const message = document.getElementById('reviewMessage').value.trim();
+            const rating = ratingValue.value;
+
+            if (!message || !rating) {
+                showNotification('Lengkapi semua field yang diperlukan', 'error');
+                return;
+            }
+
+            // Save review to localStorage
+            const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+            const review = {
+                id: Date.now(),
+                name: name,
+                message: message,
+                rating: parseInt(rating),
+                date: new Date().toLocaleDateString('id-ID')
+            };
+            reviews.push(review);
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+
+            // Reset form
+            reviewForm.reset();
+            ratingValue.value = '';
+            ratingText.textContent = 'Berapa bintang yang ingin Anda berikan?';
+            document.querySelectorAll('.star-rating i').forEach(star => star.classList.remove('active'));
+
+            showNotification('Terima kasih atas ulasan Anda!', 'success');
+            displayReviews();
+        });
+
+        function displayReviews() {
+            const reviewsList = document.getElementById('reviewsList');
+            const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+            if (reviews.length === 0) {
+                reviewsList.innerHTML = `
+                    <div class="no-reviews">
+                        <i class="fas fa-comments"></i>
+                        <p>Belum ada ulasan. Jadilah yang pertama memberikan ulasan!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            reviewsList.innerHTML = reviews.reverse().map(review => `
+                <div class="review-item">
+                    <div class="review-header">
+                        <span class="review-name">${review.name}</span>
+                        <div class="review-rating">
+                            ${'<i class="fas fa-star"></i>'.repeat(review.rating)}${'<i class="far fa-star"></i>'.repeat(5 - review.rating)}
+                        </div>
+                    </div>
+                    <p class="review-message">"${review.message}"</p>
+                    <span class="review-date">${review.date}</span>
+                </div>
+            `).join('');
+        }
+
+        // Load reviews on page load
+        document.addEventListener('DOMContentLoaded', displayReviews);
+    </script>
+    <script src="../assets/js/website-features.js"></script>
+    <script src="../assets/js/page-loader.js"></script>
+</body>
+</html>

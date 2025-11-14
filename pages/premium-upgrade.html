@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upgrade Akun Premium - DEV ROBLOX SHOP</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo"><a href="../index.html" title="Kembali ke Beranda"><img src="../assets/images/logo.jpg" alt="Logo" class="logo-img" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;"><span class="logo-text">DEV ROBLOX SHOP</span></a></div>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+                <nav class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="product.html" class="nav-link">Product</a>
+                    <a href="review.html" class="nav-link">Review</a>
+                    <a href="contact.html" class="nav-link">Kontak</a>
+                    <a href="order.html" class="nav-link order-link-mobile"><i class="fas fa-shopping-cart"></i> Pesananku</a>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <main style="min-height: calc(100vh - 200px); padding: 60px 20px; background: linear-gradient(135deg, rgba(0, 31, 63, 0.02), rgba(0, 71, 171, 0.02));">
+        <div class="container">
+            <h1 class="page-title" style="color: var(--primary-color); font-size: 2.5rem; margin-bottom: 20px;">Upgrade Akun Premium</h1>
+            
+            <div class="product-container">
+                <form class="product-form" id="gamepassForm">
+                    <!-- Username -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-user"></i> 1. Masukkan Username Roblox</h3>
+                        <div class="form-group">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" 
+                                   placeholder="Masukkan username Roblox Anda" required>
+                        </div>
+                    </div>
+
+                    <!-- Whatsapp -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-phone"></i> 2. Masukkan Nomor WhatsApp</h3>
+                        <div class="form-group">
+                            <label class="form-label">Nomor WhatsApp</label>
+                            <input type="tel" class="form-control" id="whatsapp" 
+                                   placeholder="Contoh: 0812 3456 7890" required>
+                            <small>Nomor ini digunakan untuk konfirmasi pesanan</small>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-envelope"></i> 3. Masukkan Email</h3>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" 
+                                   placeholder="Masukkan email Anda" required>
+                            <small>Email untuk verifikasi akun premium</small>
+                        </div>
+                    </div>
+
+                    <!-- Premium Options -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-crown"></i> 4. Pilih Paket Premium</h3>
+                        <div class="robux-items">
+                            <div class="robux-item">
+                                <div class="robux-icon">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <div class="robux-info">
+                                    <span class="robux-amount">1.000 Robux</span>
+                                    <span class="robux-price">Rp 190.000</span>
+                                </div>
+                                <input type="radio" name="robux" value="1000robux-190000" class="robux-radio">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-credit-card"></i> 5. Metode Pembayaran</h3>
+                        <div class="payment-options">
+                            <label class="payment-option">
+                                <input type="radio" name="paymentMethod" value="gopay" required>
+                                <div class="payment-option-content">
+                                    <i class="fas fa-wallet"></i>
+                                    <span>GoPay - Pembayaran instan melalui aplikasi Gojek</span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="paymentMethod" value="dana">
+                                <div class="payment-option-content">
+                                    <i class="fas fa-wallet"></i>
+                                    <span>DANA - Kirim saldo DANA ke nomor yang tertera</span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="paymentMethod" value="ovo">
+                                <div class="payment-option-content">
+                                    <i class="fas fa-wallet"></i>
+                                    <span>OVO - Pembayaran cepat via aplikasi OVO</span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="paymentMethod" value="shopeepay">
+                                <div class="payment-option-content">
+                                    <i class="fas fa-wallet"></i>
+                                    <span>ShopeePay - Bayar langsung melalui aplikasi ShopeePay</span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="paymentMethod" value="qris">
+                                <div class="payment-option-content">
+                                    <i class="fas fa-qrcode"></i>
+                                    <span>QRIS - Bisa untuk semua e-wallet dan bank</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="submitBtn" style="width: 100%; padding: 15px; font-size: 1.1rem; font-weight: 700;">
+                            <i class="fab fa-whatsapp"></i> Ingin Melanjutkan Pembayaran
+                        </button>
+                    </div>
+
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <p>Jika ada pertanyaan atau tidak tahu, silakan <a href="contact.html">hubungi admin</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section"><h4>DEV ROBLOX SHOP</h4><p>Penyedia kebutuhan Roblox terpercaya dan berkualitas</p></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2024 DEV ROBLOX SHOP. All Rights Reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content checkout-modal">
+            <span class="close">&times;</span>
+            <h2>Konfirmasi Pesanan</h2>
+            
+            <div class="checkout-summary">
+                <div class="summary-item">
+                    <span>Username:</span>
+                    <strong id="summaryUsername"></strong>
+                </div>
+                <div class="summary-item">
+                    <span>Paket:</span>
+                    <strong id="summaryRobux"></strong>
+                </div>
+                <div class="summary-item">
+                    <span>Harga:</span>
+                    <strong id="summaryPrice"></strong>
+                </div>
+                <div class="summary-item">
+                    <span>Metode Pembayaran:</span>
+                    <strong id="summaryPayment"></strong>
+                </div>
+                <hr>
+                <div class="summary-item total">
+                    <span>Total Harga:</span>
+                    <strong id="summaryTotal"></strong>
+                </div>
+            </div>
+
+            <div id="paymentDetails" class="payment-details"></div>
+
+            <button class="btn btn-primary" id="proceedBtn" onclick="proceedToPayment()">
+                <i class="fab fa-whatsapp"></i> Lanjutkan ke WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/product-pages.js"></script>
+
+    <style>
+        .page-title {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .product-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 31, 63, 0.1);
+        }
+
+        .product-form {
+            width: 100%;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-section h3 i {
+            color: var(--secondary-color);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark-gray);
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(0, 71, 171, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: #999;
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 5px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .robux-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .robux-item {
+            position: relative;
+            padding: 15px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .robux-item:hover {
+            border-color: var(--secondary-color);
+            background: rgba(0, 71, 171, 0.05);
+        }
+
+        .robux-item input[type="radio"]:checked {
+            accent-color: var(--secondary-color);
+        }
+
+        .robux-item input[type="radio"]:checked ~ .robux-icon,
+        .robux-item input[type="radio"]:checked ~ .robux-info {
+            color: var(--secondary-color);
+        }
+
+        .robux-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            min-width: 50px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .robux-info {
+            flex: 1;
+            transition: var(--transition);
+        }
+
+        .robux-amount {
+            display: block;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .robux-price {
+            display: block;
+            color: var(--secondary-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .robux-radio {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .payment-options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: transparent;
+        }
+
+        .payment-option:hover {
+            border-color: var(--secondary-color);
+            background: rgba(0, 71, 171, 0.05);
+        }
+
+        .payment-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-right: 15px;
+            accent-color: var(--secondary-color);
+        }
+
+        .payment-option-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .payment-option-content i {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+        }
+
+        .payment-option-content span {
+            color: var(--dark-gray);
+        }
+
+        .payment-option input[type="radio"]:checked ~ .payment-option-content {
+            color: var(--secondary-color);
+        }
+
+        .form-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 71, 171, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--light-gray);
+            color: var(--dark-gray);
+        }
+
+        .btn-secondary:hover {
+            background: #ddd;
+            transform: translateY(-2px);
+        }
+
+        .info-box {
+            background: rgba(0, 191, 255, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .info-box i {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .info-box p {
+            color: var(--dark-gray);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .info-box a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .info-box a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.8rem;
+            }
+
+            .product-container {
+                padding: 20px;
+                margin: 0 10px;
+            }
+
+            .robux-items {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .form-section h3 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</body>
+</html>

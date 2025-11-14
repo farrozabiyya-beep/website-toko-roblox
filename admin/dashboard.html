@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Dashboard Admin - Dev Roblox Shop</title>
+    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="header-content">
+            <h1><i class="fas fa-cogs"></i> Admin Panel</h1>
+            <div class="header-right">
+                <span id="adminUser" class="admin-username"></span>
+                <button id="logoutBtn" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <nav class="admin-nav">
+                <button class="nav-item active" data-section="pesanan">
+                    <i class="fas fa-list"></i> Pesanan
+                </button>
+                <button class="nav-item" data-section="akun">
+                    <i class="fas fa-user"></i> Akun Roblox
+                </button>
+                <button class="nav-item" data-section="promo">
+                    <i class="fas fa-ticket-alt"></i> Kode Promo
+                </button>
+                <button class="nav-item" data-section="flash-sale">
+                    <i class="fas fa-fire"></i> Flash Sale
+                </button>
+                <button class="nav-item" data-section="website-status">
+                    <i class="fas fa-toggle-on"></i> Buka/Tutup
+                </button>
+                <button class="nav-item" data-section="stok-produk">
+                    <i class="fas fa-boxes"></i> Stok Produk
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-content">
+            <!-- STATISTIK SECTION -->
+            <section class="statistics-section">
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Pesanan Hari Ini</h3>
+                            <p class="stat-value" id="orders-today">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Produk Paling Populer</h3>
+                            <p class="stat-value" id="most-popular-product">Tidak ada data</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-money-bill"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Revenue</h3>
+                            <p class="stat-value" id="total-revenue">Rp 0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Pesanan</h3>
+                            <p class="stat-value" id="total-orders">0</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- PESANAN SECTION -->
+            <section id="pesanan-section" class="section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-list"></i> Daftar Pesanan</h2>
+                    <div class="section-actions">
+                        <button id="refreshBtn" class="btn-primary">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                        <button id="addPesananBtn" class="btn-primary">
+                            <i class="fas fa-plus"></i> Tambah Pesanan
+                        </button>
+                    </div>
+                </div>
+
+                <div id="pesananList" class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID Pesanan</th>
+                                <th>Username</th>
+                                <th>Item</th>
+                                <th>Harga</th>
+                                <th>Status</th>
+                                <th>WhatsApp</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pesananTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="pesananEmpty" class="empty-state">Belum ada pesanan</div>
+            </section>
+
+            <!-- AKUN ROBLOX SECTION -->
+            <section id="akun-section" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-user"></i> Stok Akun Roblox</h2>
+                    <button id="addAkunBtn" class="btn-primary">
+                        <i class="fas fa-plus"></i> Tambah Akun
+                    </button>
+                </div>
+
+                <div id="akunList" class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Profil</th>
+                                <th>Username</th>
+                                <th>Harga</th>
+                                <th>Stok</th>
+                                <th>Deskripsi</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="akunTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="akunEmpty" class="empty-state">Belum ada akun</div>
+            </section>
+
+            <!-- PROMO SECTION -->
+            <section id="promo-section" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-ticket-alt"></i> Kode Promo</h2>
+                    <button id="addPromoBtn" class="btn-primary">
+                        <i class="fas fa-plus"></i> Tambah Promo
+                    </button>
+                </div>
+
+                <div id="promoList" class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Diskon (%)</th>
+                                <th>Berlaku Hingga</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="promoTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="promoEmpty" class="empty-state">Belum ada promo</div>
+            </section>
+
+            <!-- FLASH SALE SECTION -->
+            <section id="flash-sale-section" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-fire"></i> Flash Sale</h2>
+                    <button id="addFlashSaleBtn" class="btn-primary">
+                        <i class="fas fa-plus"></i> Buat Flash Sale
+                    </button>
+                </div>
+
+                <div id="flashSaleList" class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Produk</th>
+                                <th>Harga Normal</th>
+                                <th>Harga Flash Sale</th>
+                                <th>Mulai</th>
+                                <th>Berakhir</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="flashSaleTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="flashSaleEmpty" class="empty-state">Belum ada flash sale</div>
+            </section>
+
+            <!-- WEBSITE STATUS SECTION -->
+            <section id="website-status-section" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-toggle-on"></i> Atur Buka/Tutup Website</h2>
+                </div>
+
+                <div class="status-box">
+                    <div class="status-content">
+                        <h3>Status Toko</h3>
+                        <p id="websiteStatusText" class="status-text">Sedang Buka</p>
+                        <div class="status-toggle">
+                            <button id="toggleWebsiteBtn" class="btn-primary">
+                                <i class="fas fa-lock"></i> Tutup Website
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="note-box">
+                    <h4>Catatan:</h4>
+                    <p>Jika website ditutup, pelanggan akan melihat pop-up bahwa toko sedang tutup sementara dan tidak bisa mengakses halaman.</p>
+                </div>
+            </section>
+
+            <!-- STOK PRODUK SECTION -->
+            <section id="stok-produk-section" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-boxes"></i> Stok Produk</h2>
+                </div>
+
+                <div id="stokProdukList" class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Produk</th>
+                                <th>Stok Saat Ini</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stokProdukTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="stokProdukEmpty" class="empty-state">Belum ada produk</div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL PESANAN -->
+    <div id="pesananModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Form Pesanan</h2>
+            <form id="pesananForm">
+                <input type="hidden" id="pesananId">
+                <div class="form-group">
+                    <label>Username Pelanggan</label>
+                    <input type="text" id="pesananUsername" required>
+                </div>
+                <div class="form-group">
+                    <label>Item</label>
+                    <input type="text" id="pesananItem" required>
+                </div>
+                <div class="form-group">
+                    <label>Harga</label>
+                    <input type="number" id="pesananHarga" required>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="pesananStatus" required>
+                        <option value="Pending">Pending</option>
+                        <option value="Diproses">Diproses</option>
+                        <option value="Selesai">Selesai</option>
+                        <option value="Dibatalkan">Dibatalkan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>WhatsApp</label>
+                    <input type="text" id="pesananWhatsapp" required>
+                </div>
+                <button type="submit" class="btn-primary">Simpan</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL AKUN -->
+    <div id="akunModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Form Akun Roblox</h2>
+            <form id="akunForm">
+                <input type="hidden" id="akunId">
+                <div class="form-group">
+                    <label>Profil/Nama Akun</label>
+                    <input type="text" id="akunProfile" required>
+                </div>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="akunUsername" required>
+                </div>
+                <div class="form-group">
+                    <label>Harga</label>
+                    <input type="number" id="akunHarga" required>
+                </div>
+                <div class="form-group">
+                    <label>Stok</label>
+                    <input type="number" id="akunStok" required>
+                </div>
+                <div class="form-group">
+                    <label>Deskripsi</label>
+                    <textarea id="akunDeskripsi"></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Simpan</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL PROMO -->
+    <div id="promoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Form Kode Promo</h2>
+            <form id="promoForm">
+                <input type="hidden" id="promoId">
+                <div class="form-group">
+                    <label>Kode Promo</label>
+                    <input type="text" id="promoKode" required>
+                </div>
+                <div class="form-group">
+                    <label>Diskon (%)</label>
+                    <input type="number" id="promoDiskon" required>
+                </div>
+                <div class="form-group">
+                    <label>Berlaku Hingga</label>
+                    <input type="date" id="promoBerlakuHingga" required>
+                </div>
+                <button type="submit" class="btn-primary">Simpan</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL FLASH SALE -->
+    <div id="flashSaleModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Form Flash Sale</h2>
+            <form id="flashSaleForm">
+                <input type="hidden" id="flashSaleId">
+                <div class="form-group">
+                    <label>Pilih Produk</label>
+                    <select id="flashSaleProduk" required>
+                        <option value="">-- Pilih Produk --</option>
+                        <option value="salon-fiestas">Salon Fiestas</option>
+                        <option value="lucky-block-battleground">Lucky Block Battleground</option>
+                        <option value="disaster-survival">Disaster Survival</option>
+                        <option value="lumber-tycoon-2">Lumber Tycoon 2</option>
+                        <option value="pet-ranch-simulator">Pet Ranch Simulator</option>
+                        <option value="robux-gamepass">Robux & Gamepass</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Harga Normal (Rp)</label>
+                    <input type="number" id="flashSaleHargaNormal" required>
+                </div>
+                <div class="form-group">
+                    <label>Harga Flash Sale (Rp)</label>
+                    <input type="number" id="flashSaleHarga" required>
+                </div>
+                <div class="form-group">
+                    <label>Waktu Mulai</label>
+                    <input type="datetime-local" id="flashSaleWaktuMulai" required>
+                </div>
+                <div class="form-group">
+                    <label>Waktu Berakhir</label>
+                    <input type="datetime-local" id="flashSaleWaktuBerakhir" required>
+                </div>
+                <button type="submit" class="btn-primary">Simpan</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL STOK PRODUK -->
+    <div id="stokProdukModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Atur Stok Produk</h2>
+            <form id="stokProdukForm">
+                <input type="hidden" id="stokProdukId">
+                <div class="form-group">
+                    <label>Produk</label>
+                    <input type="text" id="stokProdukNama" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Stok</label>
+                    <input type="number" id="stokProdukJumlah" required min="0">
+                </div>
+                <button type="submit" class="btn-primary">Simpan</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

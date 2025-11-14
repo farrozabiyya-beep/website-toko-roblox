@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produk - DEV ROBLOX SHOP</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="../index.html" title="Kembali ke Beranda">
+                        <img src="../assets/images/logo.jpg" alt="Logo" class="logo-img" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        <span class="logo-text">DEV ROBLOX SHOP</span>
+                    </a>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <nav class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="product.html" class="nav-link">Product</a>
+                    <a href="review.html" class="nav-link">Review</a>
+                    <a href="contact.html" class="nav-link">Kontak</a>
+                    <a href="order.html" class="nav-link order-link-mobile">
+                        <i class="fas fa-shopping-cart"></i> Pesananku
+                    </a>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="product-listing-page">
+        <div class="container">
+            <h1 class="page-title">Daftar Produk Kami</h1>
+            <p class="page-subtitle">Pilih produk yang ingin Anda beli dan nikmati layanan terbaik kami</p>
+
+            <!-- Produk Unggulan -->
+            <section class="product-section">
+                <h2 class="section-title">Produk Unggulan</h2>
+                <div class="products-grid">
+                    <div class="product-card" data-product="robux-gamepass" onclick="goToPage('robux-gamepass.html')">
+                        <div class="product-image">
+                            <img src="../assets/images/robux-gamepass.png" alt="Robux Via Gamepass">
+                            <span class="product-badge">Unggulan</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Robux Via Gamepass</h3>
+                            <p>Dapatkan Robux melalui Gamepass dengan aman dan terpercaya</p>
+                            <div class="product-footer">
+                                <span class="price">Mulai Rp 5.000</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" onclick="goToPage('premium-upgrade.html')">
+                        <div class="product-image">
+                            <img src="../assets/images/premium.png" alt="Upgrade Premium">
+                            <span class="product-badge">Unggulan</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Upgrade Akun Premium</h3>
+                            <p>Tingkatkan akun Anda ke level premium dengan harga terjangkau</p>
+                            <div class="product-footer">
+                                <span class="price">Rp 190.000</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" onclick="goToPage('robux-instant.html')">
+                        <div class="product-image">
+                            <img src="../assets/images/robux-instant.png" alt="Robux Instant">
+                            <span class="product-badge">Unggulan</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Robux Instant (Via Login)</h3>
+                            <p>Terima Robux secara instan dengan login ke akun Anda</p>
+                            <div class="product-footer">
+                                <span class="price">Mulai Rp 19.500</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" onclick="goToPage('akun-roblox.html')">
+                        <div class="product-image">
+                            <img src="../assets/images/akun-roblox.png" alt="Akun Roblox">
+                            <span class="product-badge">Unggulan</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Akun Roblox</h3>
+                            <p>Beli akun Roblox yang sudah setup dan siap digunakan</p>
+                            <div class="product-footer">
+                                <span class="price">Bervariasi</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Produk Dalam Game -->
+            <section class="product-section">
+                <h2 class="section-title">Produk Dalam Game</h2>
+                <div class="games-grid">
+                    <div class="game-card" onclick="goToPage('car-driving.html')">
+                        <img src="../assets/images/car-driving.png" alt="Car Driving Indonesia">
+                        <div class="game-info">
+                            <h3>Car Driving Indonesia</h3>
+                        </div>
+                    </div>
+                    <div class="game-card" onclick="goToPage('taxi-boss.html')">
+                        <img src="../assets/images/taxi-boss.png" alt="Taxi Boss">
+                        <div class="game-info">
+                            <h3>Taxi Boss</h3>
+                        </div>
+                    </div>
+                    <div class="game-card" onclick="goToPage('steal-brainrot.html')">
+                        <img src="../assets/images/steal-brainrot.png" alt="Steal a Brainrot">
+                        <div class="game-info">
+                            <h3>Steal a Brainrot</h3>
+                        </div>
+                    </div>
+                    <div class="game-card" onclick="goToPage('strongest-battlegrounds.html')">
+                        <img src="../assets/images/strongest-battlegrounds.png" alt="Strongest Battlegrounds">
+                        <div class="game-info">
+                            <h3>Strongest Battlegrounds</h3>
+                        </div>
+                    </div>
+                    <div class="game-card" onclick="goToPage('brookhaven.html')">
+                        <img src="../assets/images/brookhaven.png" alt="Brookhaven RP">
+                        <div class="game-info">
+                            <h3>Brookhaven RP</h3>
+                        </div>
+                    </div>
+                    <div class="game-card" onclick="goToPage('salon-fiestas.html')">
+                        <img src="../assets/images/salon-fiestas.png" alt="Salon de Fiestas">
+                        <div class="game-info">
+                            <h3>Salon de Fiestas</h3>
+                        </div>
+                    </div>
+                    <div class="game-card" onclick="goToPage('fisch.html')">
+                        <img src="../assets/images/fisch.png" alt="Fisch">
+                        <div class="game-info">
+                            <h3>Fisch</h3>
+                        </div>
+                    </div>
+                    <div class="game-card" onclick="goToPage('blox-fruit.html')">
+                        <img src="../assets/images/blox-fruit.png" alt="Blox Fruit">
+                        <div class="game-info">
+                            <h3>Blox Fruit</h3>
+                        </div>
+                    </div>
+                </div>
+                <p class="games-info">Game lainnya akan tersedia segera...</p>
+            </section>
+        </div>
+    </main>
+
+    <style>
+        .product-listing-page {
+            min-height: calc(100vh - 200px);
+            padding: 60px 20px;
+            background: linear-gradient(135deg, rgba(0, 31, 63, 0.02), rgba(0, 71, 171, 0.02));
+        }
+
+        .page-title {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            opacity: 0.8;
+        }
+
+        .product-section {
+            margin-bottom: 80px;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.8rem;
+            }
+
+            .page-subtitle {
+                font-size: 1rem;
+            }
+
+            .product-section {
+                margin-bottom: 50px;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>DEV ROBLOX SHOP</h4>
+                    <p>Penyedia kebutuhan Roblox terpercaya dan berkualitas</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Beranda</a></li>
+                        <li><a href="product.html">Produk</a></li>
+                        <li><a href="review.html">Review</a></li>
+                        <li><a href="contact.html">Kontak</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DEV ROBLOX SHOP. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Profile -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Menu Profil</h2>
+            <a href="order.html" class="modal-link">
+                <i class="fas fa-shopping-cart"></i> Pesanan Saya
+            </a>
+            <a href="admin/login.html" class="modal-link">
+                <i class="fas fa-lock"></i> Admin Panel
+            </a>
+        </div>
+    </div>
+
+    <script src="../assets/js/website-features.js"></script>
+    <script src="../assets/js/page-loader.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

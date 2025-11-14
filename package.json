@@ -1,0 +1,25 @@
+{
+  "name": "dev-roblox-shop",
+  "version": "1.0.0",
+  "description": "DEV Roblox Shop - E-commerce platform untuk produk Roblox",
+  "main": "index.html",
+  "scripts": {
+    "start": "netlify dev",
+    "build": "echo 'Static site - no build needed'",
+    "deploy": "netlify deploy --prod"
+  },
+  "keywords": [
+    "roblox",
+    "shop",
+    "ecommerce",
+    "gamepass"
+  ],
+  "author": "DEV ROBLOX SHOP",
+  "license": "MIT",
+  "devDependencies": {
+    "netlify-cli": "^15.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

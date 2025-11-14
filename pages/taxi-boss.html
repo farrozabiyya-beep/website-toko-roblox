@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxi Boss - DEV ROBLOX SHOP</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/product-page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="../index.html" title="Kembali ke Beranda">
+                        <img src="../assets/images/logo.jpg" alt="Logo" class="logo-img" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        <span class="logo-text">DEV ROBLOX SHOP</span>
+                    </a>
+                </div>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+                <nav class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="product.html" class="nav-link">Product</a>
+                    <a href="review.html" class="nav-link">Review</a>
+                    <a href="contact.html" class="nav-link">Kontak</a>
+                    <a href="order.html" class="nav-link order-link-mobile"><i class="fas fa-shopping-cart"></i> Pesananku</a>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="page-title">Taxi Boss</h1>
+            <form class="product-form" id="gamepassForm">
+                <div class="form-section">
+                    <h3><i class="fas fa-user"></i> 1. Masukkan Username Roblox</h3>
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" placeholder="Masukkan username Roblox Anda" required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-phone"></i> 2. Masukkan Nomor WhatsApp</h3>
+                    <div class="form-group">
+                        <label class="form-label">Nomor WhatsApp</label>
+                        <input type="tel" class="form-control" id="whatsapp" placeholder="Contoh: 0812 3456 7890" required>
+                        <small>Nomor ini digunakan untuk konfirmasi pesanan</small>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-gift"></i> 3. Pilih Item</h3>
+                    <div class="robux-items">
+                        <div class="robux-item">
+                            <div class="robux-icon"><i class="fas fa-car"></i></div>
+                            <div class="robux-info">
+                                <span class="robux-amount">Customization</span>
+                                <span class="robux-price">Rp 6.000</span>
+                            </div>
+                            <input type="radio" name="robux" value="customization-6000" class="robux-radio">
+                        </div>
+                        <div class="robux-item">
+                            <div class="robux-icon"><i class="fas fa-car"></i></div>
+                            <div class="robux-info">
+                                <span class="robux-amount">VIP</span>
+                                <span class="robux-price">Rp 45.000</span>
+                            </div>
+                            <input type="radio" name="robux" value="vip-45000" class="robux-radio">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-credit-card"></i> 4. Metode Pembayaran</h3>
+                    <div class="payment-options">
+                        <label class="payment-option">
+                            <input type="radio" name="paymentMethod" value="gopay" required>
+                            <div class="payment-option-content"><i class="fas fa-wallet"></i><span>GoPay</span></div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="paymentMethod" value="dana">
+                            <div class="payment-option-content"><i class="fas fa-wallet"></i><span>DANA</span></div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="paymentMethod" value="ovo">
+                            <div class="payment-option-content"><i class="fas fa-wallet"></i><span>OVO</span></div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="paymentMethod" value="shopeepay">
+                            <div class="payment-option-content"><i class="fas fa-wallet"></i><span>ShopeePay</span></div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="paymentMethod" value="qris">
+                            <div class="payment-option-content"><i class="fas fa-qrcode"></i><span>QRIS</span></div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="submitBtn" style="width: 100%; padding: 15px; font-size: 1.1rem; font-weight: 700;"><i class="fab fa-whatsapp"></i> Ingin Melanjutkan Pembayaran</button>
+                </div>
+                <div class="info-box"><i class="fas fa-info-circle"></i><p>Jika ada pertanyaan, silakan <a href="contact.html">hubungi admin</a></p></div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section"><h4>DEV ROBLOX SHOP</h4><p>Penyedia kebutuhan Roblox terpercaya dan berkualitas</p></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2024 DEV ROBLOX SHOP. All Rights Reserved.</p></div>
+        </div>
+    </footer>
+
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content checkout-modal">
+            <span class="close">&times;</span>
+            <h2>Konfirmasi Pesanan</h2>
+            <div class="checkout-summary">
+                <div class="summary-item"><span>Username:</span><strong id="summaryUsername"></strong></div>
+                <div class="summary-item"><span>Item:</span><strong id="summaryRobux"></strong></div>
+                <div class="summary-item"><span>Harga:</span><strong id="summaryPrice"></strong></div>
+                <div class="summary-item"><span>Metode Pembayaran:</span><strong id="summaryPayment"></strong></div>
+                <hr>
+                <div class="summary-item total"><span>Total Harga:</span><strong id="summaryTotal"></strong></div>
+            </div>
+            <div id="paymentDetails" class="payment-details"></div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="closeModalBtn" style="cursor: pointer;">
+                    <i class="fas fa-times"></i> Batal
+                </button>
+                <button class="btn btn-primary" id="proceedBtn" onclick="proceedToPayment()">
+                    <i class="fab fa-whatsapp"></i> Lanjutkan Pembayaran
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/product-pages.js"></script>
+</body>
+</html>

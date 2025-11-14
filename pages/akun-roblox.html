@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akun Roblox - DEV ROBLOX SHOP</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Loading screen - REMOVED per requirements */
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="../index.html" title="Kembali ke Beranda">
+                        <img src="../assets/images/logo.jpg" alt="Logo" class="logo-img" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        <span class="logo-text">DEV ROBLOX SHOP</span>
+                    </a>
+                </div>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+                <nav class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="product.html" class="nav-link">Product</a>
+                    <a href="review.html" class="nav-link">Review</a>
+                    <a href="contact.html" class="nav-link">Kontak</a>
+                    <a href="order.html" class="nav-link order-link-mobile"><i class="fas fa-shopping-cart"></i> Pesananku</a>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <main style="min-height: calc(100vh - 200px); padding: 60px 20px; background: linear-gradient(135deg, rgba(0, 31, 63, 0.02), rgba(0, 71, 171, 0.02));" data-product="akun-roblox">
+        <div class="container">
+            <h1 style="color: var(--primary-color); font-size: 2.5rem; margin-bottom: 20px; text-align: center;">Akun Roblox</h1>
+            <p style="color: var(--dark-gray); font-size: 1.1rem; margin-bottom: 40px; text-align: center;">Temukan akun impian kamu dan beli dengan mudah</p>
+            
+            <!-- Account List -->
+            <div id="accountsList" class="products-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+                <!-- Akun akan ditampilkan di sini -->
+            </div>
+
+            <!-- No Stock Message -->
+            <div id="noStockMessage" style="text-align: center; padding: 60px 20px; display: none;">
+                <i class="fas fa-inbox" style="font-size: 5rem; color: var(--secondary-color); opacity: 0.5; margin-bottom: 20px;"></i>
+                <h2 style="color: var(--primary-color); margin-bottom: 10px;">Ups, tidak ada stock tersedia</h2>
+                <p style="color: var(--dark-gray); font-size: 1.1rem;">Nantikan kembali stock nya yah! 😊</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section"><h4>DEV ROBLOX SHOP</h4><p>Penyedia kebutuhan Roblox terpercaya dan berkualitas</p></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2024 DEV ROBLOX SHOP. All Rights Reserved.</p></div>
+        </div>
+    </footer>
+
+    <style>
+        .product-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 31, 63, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 191, 255, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+            position: relative;
+        }
+
+        .product-image i {
+            font-size: 4rem;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .product-info p {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .price {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .btn-buy {
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-buy:hover {
+            background: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .logo-img {
+            border: 2px solid rgba(0, 191, 255, 0.3);
+            animation: rotate 20s linear infinite;
+        }
+    </style>
+
+    <script src="../assets/js/main.js"></script>
+    <script>
+        // Load akun roblox dari LocalStorage atau API
+        function loadRobloxAccounts() {
+            // Ambil dari localStorage atau buat data default
+            let accounts = JSON.parse(localStorage.getItem('robloxAccounts')) || [
+                {
+                    id: 'acc-1',
+                    profile: 'Akun Premium',
+                    username: 'PremiumPlayer123',
+                    price: 150000,
+                    stock: 2,
+                    description: 'Akun dengan level tinggi dan banyak item'
+                },
+                {
+                    id: 'acc-2',
+                    profile: 'Akun Standar',
+                    username: 'StandardUser456',
+                    price: 75000,
+                    stock: 5,
+                    description: 'Akun baru dengan outfit lengkap'
+                },
+                {
+                    id: 'acc-3',
+                    profile: 'Akun VIP',
+                    username: 'VIPMember789',
+                    price: 250000,
+                    stock: 1,
+                    description: 'Akun VIP dengan badge eksklusif'
+                }
+            ];
+            
+            const accountsList = document.getElementById('accountsList');
+            const noStockMessage = document.getElementById('noStockMessage');
+            
+            if (accounts.length === 0) {
+                accountsList.style.display = 'none';
+                noStockMessage.style.display = 'block';
+                return;
+            }
+            
+            accountsList.innerHTML = '';
+            accounts.forEach(account => {
+                if (account.stock > 0) {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.innerHTML = `
+                        <div class="product-image">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3>${account.profile || 'Akun Roblox'}</h3>
+                            <p><strong>Username:</strong> ${account.username}</p>
+                            <p>${account.description || ''}</p>
+                            <div class="product-footer">
+                                <span class="price">Rp ${account.price.toLocaleString('id-ID')}</span>
+                                <button class="btn-buy" onclick="buyAccount('${account.id}')">
+                                    <i class="fab fa-whatsapp"></i> Ingin Melanjutkan Pembayaran
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    accountsList.appendChild(card);
+                }
+            });
+            
+            if (accountsList.children.length === 0) {
+                accountsList.style.display = 'none';
+                noStockMessage.style.display = 'block';
+            } else {
+                accountsList.style.display = 'grid';
+                noStockMessage.style.display = 'none';
+            }
+        }
+
+        function buyAccount(accountId) {
+            const accounts = JSON.parse(localStorage.getItem('robloxAccounts')) || [];
+            const account = accounts.find(a => a.id === accountId);
+            
+            if (!account) return;
+            
+            const message = `Halo min, saya ingin membeli akun:
+
+Nama Akun: ${account.profile}
+Username: ${account.username}
+Harga: Rp ${account.price.toLocaleString('id-ID')}
+Deskripsi: ${account.description}
+
+Mohon segera diproses. Terima kasih!`;
+
+            // Buka WhatsApp ke nomor admin: 6281214477714
+            const adminPhone = '6281214477714';
+            const encoded = encodeURIComponent(message);
+            window.open(`https://wa.me/${adminPhone}?text=${encoded}`, '_blank');
+        }
+
+        // Load saat page load
+        document.addEventListener('DOMContentLoaded', loadRobloxAccounts);
+        
+        // Listen for real-time updates dari admin panel
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'robloxAccounts' || e.key === '_adminDataUpdate') {
+                loadRobloxAccounts();
+            }
+        });
+    </script>
+    <script src="../assets/js/website-features.js"></script>
+    <script src="../assets/js/page-loader.js"></script>
+</body>
+</html>
