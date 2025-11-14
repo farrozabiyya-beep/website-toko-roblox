@@ -20,23 +20,43 @@ function setupLoginForm() {
     const form = document.getElementById('loginForm');
     const errorMessage = document.getElementById('errorMessage');
 
+    if (!form) {
+        console.error('Form login tidak ditemukan!');
+        return;
+    }
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const username = document.getElementById('username').value.trim();
-        const password = document.getElementById('password').value.trim();
+        const username = document.getElementById('username');
+        const password = document.getElementById('password');
 
-        if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+        if (!username || !password) {
+            errorMessage.textContent = 'Form tidak lengkap!';
+            errorMessage.classList.add('show');
+            return;
+        }
+
+        const user = username.value.trim();
+        const pass = password.value.trim();
+
+        console.log('Login attempt:', { user, pass });
+
+        if (user === ADMIN_USERNAME && pass === ADMIN_PASSWORD) {
+            console.log('Login berhasil!');
             // Login berhasil - simpan session
             localStorage.setItem('adminSession', JSON.stringify({
-                username: username,
+                username: user,
                 loginTime: new Date().getTime()
             }));
 
             // Redirect ke dashboard
-            window.location.href = 'dashboard.html';
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 500);
         } else {
             // Login gagal
+            console.log('Login gagal - kredensial salah');
             errorMessage.textContent = 'Username atau Password salah';
             errorMessage.classList.add('show');
             setTimeout(() => {
@@ -51,13 +71,24 @@ function checkAdminLogin() {
     const session = localStorage.getItem('adminSession');
     
     if (!session) {
+        console.log('Tidak ada session, redirect ke login');
         // Belum login - redirect ke login page
         window.location.href = 'index.html';
         return;
     }
 
-    const sessionData = JSON.parse(session);
-    document.getElementById('adminUser').textContent = `Halo, ${sessionData.username}`;
+    try {
+        const sessionData = JSON.parse(session);
+        const adminUserEl = document.getElementById('adminUser');
+        if (adminUserEl) {
+            adminUserEl.textContent = `Halo, ${sessionData.username}`;
+        }
+        console.log('Session valid:', sessionData.username);
+    } catch (error) {
+        console.error('Error parsing session:', error);
+        localStorage.removeItem('adminSession');
+        window.location.href = 'index.html';
+    }
 }
 
 // ========== LOGOUT ==========
