@@ -7,7 +7,146 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Loading screen - REMOVED per requirements */
+        .category-tabs {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            padding: 12px 25px;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .category-tab:hover,
+        .category-tab.active {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .account-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 31, 63, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .account-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 191, 255, 0.2);
+        }
+
+        .account-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .account-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            border: 4px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .account-info {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .account-username {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .account-level {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .account-description {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .account-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .account-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .buy-btn {
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .buy-btn:hover {
+            background: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        .empty-icon {
+            font-size: 5rem;
+            color: var(--secondary-color);
+            opacity: 0.5;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .account-card {
+                min-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -26,16 +165,26 @@
                     <a href="product.html" class="nav-link">Product</a>
                     <a href="review.html" class="nav-link">Review</a>
                     <a href="contact.html" class="nav-link">Kontak</a>
-                    <a href="order.html" class="nav-link order-link"><i class="fas fa-shopping-cart"></i> Pesananku</a>
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                    <a href="pesananku.html" class="nav-link order-link"><i class="fas fa-package"></i> Pesananku</a>
+                    <a href="../auth/customer-account.html" class="nav-link"><i class="fas fa-user-circle"></i> Akun</a>
                 </nav>
             </div>
         </nav>
     </header>
 
-    <main style="min-height: calc(100vh - 200px); padding: 60px 20px; background: linear-gradient(135deg, rgba(0, 31, 63, 0.02), rgba(0, 71, 171, 0.02));" data-product="akun-roblox">
-        <div class="container">
-            <h1 style="color: var(--primary-color); font-size: 2.5rem; margin-bottom: 20px; text-align: center;">Akun Roblox</h1>
-            <p style="color: var(--dark-gray); font-size: 1.1rem; margin-bottom: 40px; text-align: center;">Temukan akun impian kamu dan beli dengan mudah</p>
+    <main style="min-height: calc(100vh - 200px); padding: 60px 20px; background: linear-gradient(135deg, rgba(0, 31, 63, 0.02), rgba(0, 71, 171, 0.02));">
+        <div class="container" style="max-width: 1200px;">
+            <h1 style="color: var(--primary-color); font-size: 2.5rem; margin-bottom: 10px; text-align: center;">🎮 Akun Roblox Premium</h1>
+            <p style="color: var(--dark-gray); font-size: 1.1rem; margin-bottom: 40px; text-align: center;">Pilih akun impianmu dari koleksi kami</p>
+            
+            <!-- Category Tabs -->
+            <div class="category-tabs">
+                <button class="category-tab active" onclick="filterByCategory('semua')">Semua</button>
+                <button class="category-tab" onclick="filterByCategory('pemula')">👶 Pemula</button>
+                <button class="category-tab" onclick="filterByCategory('menengah')">⭐ Menengah</button>
+                <button class="category-tab" onclick="filterByCategory('expert')">👑 Expert</button>
+            </div>
             
             <!-- Account List -->
             <div id="accountsList" class="products-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
@@ -44,7 +193,7 @@
 
             <!-- No Stock Message -->
             <div id="noStockMessage" style="text-align: center; padding: 60px 20px; display: none;">
-                <i class="fas fa-inbox" style="font-size: 5rem; color: var(--secondary-color); opacity: 0.5; margin-bottom: 20px;"></i>
+                <div class="empty-icon"><i class="fas fa-inbox"></i></div>
                 <h2 style="color: var(--primary-color); margin-bottom: 10px;">Ups, tidak ada stock tersedia</h2>
                 <p style="color: var(--dark-gray); font-size: 1.1rem;">Nantikan kembali stock nya yah! 😊</p>
             </div>
@@ -54,208 +203,191 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section"><h4>DEV ROBLOX SHOP</h4><p>Penyedia kebutuhan Roblox terpercaya dan berkualitas</p></div>
+                <div class="footer-section">
+                    <h4>DEV ROBLOX SHOP</h4>
+                    <p>Penyedia kebutuhan Roblox terpercaya dan berkualitas</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Beranda</a></li>
+                        <li><a href="product.html">Produk</a></li>
+                        <li><a href="review.html">Review</a></li>
+                        <li><a href="contact.html">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Hubungi Kami</h4>
+                    <p><a href="https://wa.me/6281214477714" class="contact-link">💬 Chat WhatsApp Kami</a></p>
+                    <p><a href="https://www.instagram.com/devrobloxshop_/" class="contact-link">📷 Instagram DM</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Informasi</h4>
+                    <p><a href="faq.html">FAQ</a></p>
+                    <p><a href="legal.html">Syarat & Ketentuan</a></p>
+                    <p><a href="legal.html">Kebijakan Privasi</a></p>
+                </div>
             </div>
-            <div class="footer-bottom"><p>&copy; 2024 DEV ROBLOX SHOP. All Rights Reserved.</p></div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 DEV ROBLOX SHOP. All Rights Reserved.</p>
+            </div>
         </div>
     </footer>
 
-    <style>
-        .product-card {
-            background: var(--white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 31, 63, 0.1);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 191, 255, 0.15);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 3rem;
-            position: relative;
-        }
-
-        .product-image i {
-            font-size: 4rem;
-        }
-
-        .product-info {
-            padding: 20px;
-        }
-
-        .product-info h3 {
-            color: var(--primary-color);
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-
-        .product-info p {
-            color: var(--dark-gray);
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-
-        .product-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid var(--light-gray);
-        }
-
-        .price {
-            color: var(--secondary-color);
-            font-weight: 600;
-            font-size: 1.2rem;
-        }
-
-        .btn-buy {
-            background: var(--secondary-color);
-            color: var(--white);
-            padding: 8px 16px;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-buy:hover {
-            background: var(--primary-color);
-            transform: scale(1.05);
-        }
-
-        .logo-img {
-            border: 2px solid rgba(0, 191, 255, 0.3);
-            animation: rotate 20s linear infinite;
-        }
-    </style>
-
-    <script src="../assets/js/main.js"></script>
     <script>
-        // Load akun roblox dari LocalStorage atau API
-        function loadRobloxAccounts() {
-            // Ambil dari localStorage atau buat data default
-            let accounts = JSON.parse(localStorage.getItem('robloxAccounts')) || [
-                {
-                    id: 'acc-1',
-                    profile: 'Akun Premium',
-                    username: 'PremiumPlayer123',
-                    price: 150000,
-                    stock: 2,
-                    description: 'Akun dengan level tinggi dan banyak item'
-                },
-                {
-                    id: 'acc-2',
-                    profile: 'Akun Standar',
-                    username: 'StandardUser456',
-                    price: 75000,
-                    stock: 5,
-                    description: 'Akun baru dengan outfit lengkap'
-                },
-                {
-                    id: 'acc-3',
-                    profile: 'Akun VIP',
-                    username: 'VIPMember789',
-                    price: 250000,
-                    stock: 1,
-                    description: 'Akun VIP dengan badge eksklusif'
-                }
-            ];
-            
+        const accountsData = [
+            // Pemula
+            {
+                id: 1,
+                category: 'pemula',
+                username: 'NewbiePlayer',
+                level: 5,
+                emoji: '🎮',
+                description: 'Akun baru dengan level 5. Cocok untuk pemula yang ingin mulai petualangan baru!',
+                price: 25000
+            },
+            {
+                id: 2,
+                category: 'pemula',
+                username: 'StartHelper',
+                level: 8,
+                emoji: '⭐',
+                description: 'Akun pemula dengan beberapa game favorit. Siap untuk berkembang!',
+                price: 35000
+            },
+            {
+                id: 3,
+                category: 'pemula',
+                username: 'BeginnerGamer',
+                level: 6,
+                emoji: '🎯',
+                description: 'Akun starter dengan koleksi game basic. Perfect untuk newbie!',
+                price: 30000
+            },
+            // Menengah
+            {
+                id: 4,
+                category: 'menengah',
+                username: 'ProGamer',
+                level: 25,
+                emoji: '⭐',
+                description: 'Akun menengah dengan level 25. Banyak game dan item eksklusif!',
+                price: 75000
+            },
+            {
+                id: 5,
+                category: 'menengah',
+                username: 'BloxAdventurer',
+                level: 30,
+                emoji: '🏆',
+                description: 'Akun dengan banyak achievement dan badge. Ready untuk serious gaming!',
+                price: 95000
+            },
+            {
+                id: 6,
+                category: 'menengah',
+                username: 'GameMaster',
+                level: 28,
+                emoji: '💎',
+                description: 'Akun menengah dengan koleksi game lengkap dan robux bonus!',
+                price: 85000
+            },
+            // Expert
+            {
+                id: 7,
+                category: 'expert',
+                username: 'UltraPlayer',
+                level: 50,
+                emoji: '👑',
+                description: 'Akun legendaris level 50! Semua game unlocked + special items!',
+                price: 250000
+            },
+            {
+                id: 8,
+                category: 'expert',
+                username: 'EliteGamer',
+                level: 45,
+                emoji: '🌟',
+                description: 'Akun expert dengan rare items collection. Status symbol sejati!',
+                price: 200000
+            },
+            {
+                id: 9,
+                category: 'expert',
+                username: 'LegendaryBlox',
+                level: 52,
+                emoji: '💥',
+                description: 'Akun ultimate dengan semua achievement! Paling lengkap & prestigious!',
+                price: 300000
+            }
+        ];
+
+        let currentCategory = 'semua';
+
+        function renderAccounts(data = accountsData) {
             const accountsList = document.getElementById('accountsList');
             const noStockMessage = document.getElementById('noStockMessage');
-            
-            if (accounts.length === 0) {
+
+            if (data.length === 0) {
                 accountsList.style.display = 'none';
                 noStockMessage.style.display = 'block';
                 return;
             }
+
+            accountsList.style.display = 'grid';
+            noStockMessage.style.display = 'none';
+
+            accountsList.innerHTML = data.map(account => `
+                <div class="account-card">
+                    <div class="account-image">
+                        <div class="account-avatar">${account.emoji}</div>
+                    </div>
+                    <div class="account-info">
+                        <div class="account-username">${account.username}</div>
+                        <div class="account-level">
+                            <i class="fas fa-star"></i> Level ${account.level}
+                        </div>
+                        <div class="account-description">${account.description}</div>
+                    </div>
+                    <div class="account-footer">
+                        <div class="account-price">Rp ${account.price.toLocaleString('id-ID')}</div>
+                        <button class="buy-btn" onclick="handleBuy('${account.username}', ${account.price})">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterByCategory(category) {
+            currentCategory = category;
             
-            accountsList.innerHTML = '';
-            accounts.forEach(account => {
-                if (account.stock > 0) {
-                    const card = document.createElement('div');
-                    card.className = 'product-card';
-                    card.innerHTML = `
-                        <div class="product-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="product-info">
-                            <h3>${account.profile || 'Akun Roblox'}</h3>
-                            <p><strong>Username:</strong> ${account.username}</p>
-                            <p>${account.description || ''}</p>
-                            <div class="product-footer">
-                                <span class="price">Rp ${account.price.toLocaleString('id-ID')}</span>
-                                <button class="btn-buy" onclick="buyAccount('${account.id}')">
-                                    <i class="fab fa-whatsapp"></i> Ingin Melanjutkan Pembayaran
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    accountsList.appendChild(card);
-                }
+            // Update button status
+            document.querySelectorAll('.category-tab').forEach(btn => {
+                btn.classList.remove('active');
             });
+            event.target.classList.add('active');
+
+            // Filter data
+            const filtered = category === 'semua' 
+                ? accountsData 
+                : accountsData.filter(acc => acc.category === category);
             
-            if (accountsList.children.length === 0) {
-                accountsList.style.display = 'none';
-                noStockMessage.style.display = 'block';
-            } else {
-                accountsList.style.display = 'grid';
-                noStockMessage.style.display = 'none';
-            }
+            renderAccounts(filtered);
         }
 
-        function buyAccount(accountId) {
-            const accounts = JSON.parse(localStorage.getItem('robloxAccounts')) || [];
-            const account = accounts.find(a => a.id === accountId);
-            
-            if (!account) return;
-            
-            const message = `Halo min, saya ingin membeli akun:
-
-Nama Akun: ${account.profile}
-Username: ${account.username}
-Harga: Rp ${account.price.toLocaleString('id-ID')}
-Deskripsi: ${account.description}
-
-Mohon segera diproses. Terima kasih!`;
-
-            // Buka WhatsApp ke nomor admin: 6281214477714
-            const adminPhone = '6281214477714';
-            const encoded = encodeURIComponent(message);
-            window.open(`https://wa.me/${adminPhone}?text=${encoded}`, '_blank');
+        function handleBuy(username, price) {
+            alert(`Pembelian Akun: ${username}\nHarga: Rp ${price.toLocaleString('id-ID')}\n\nSilakan hubungi admin kami via WhatsApp untuk proses pembelian!`);
+            window.location.href = `https://wa.me/6281214477714?text=Saya%20ingin%20membeli%20akun%20${username}%20seharga%20Rp${price}`;
         }
 
-        // Load saat page load
-        document.addEventListener('DOMContentLoaded', loadRobloxAccounts);
-        
-        // Listen for real-time updates dari admin panel
-        window.addEventListener('storage', (e) => {
-            if (e.key === 'robloxAccounts' || e.key === '_adminDataUpdate') {
-                loadRobloxAccounts();
-            }
+        // Hamburger menu
+        document.getElementById('hamburger').addEventListener('click', () => {
+            document.getElementById('navMenu').classList.toggle('active');
         });
+
+        // Initial render
+        renderAccounts();
     </script>
-    <script src="../assets/js/website-features.js"></script>
-    <script src="../assets/js/page-loader.js"></script>
 </body>
 </html>
-

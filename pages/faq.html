@@ -32,54 +32,6 @@
             font-size: 1.1rem;
         }
 
-        .faq-search {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 40px;
-        }
-
-        .faq-search input {
-            flex: 1;
-            padding: 15px 20px;
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
-            font-size: 1rem;
-            background: var(--input-bg);
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-        }
-
-        .faq-search input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px var(--primary-color)33;
-        }
-
-        .faq-categories {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .category-btn {
-            padding: 10px 20px;
-            border: 2px solid var(--border-color);
-            background: transparent;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            color: var(--text-primary);
-        }
-
-        .category-btn:hover,
-        .category-btn.active {
-            background: var(--gradient-primary);
-            border-color: var(--primary-color);
-            color: white;
-        }
-
         .faq-items {
             display: grid;
             gap: 15px;
@@ -104,44 +56,23 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 15px;
-            background: var(--card-hover);
-            transition: all 0.3s ease;
+            user-select: none;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1.05rem;
         }
 
         .faq-question:hover {
-            background: var(--input-bg);
-        }
-
-        .faq-question-text {
-            flex: 1;
-            font-weight: 600;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            background: var(--hover-bg);
         }
 
         .faq-icon {
             font-size: 1.3rem;
             color: var(--primary-color);
-            min-width: 30px;
+            transition: transform 0.3s ease;
         }
 
-        .faq-toggle {
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--gradient-primary);
-            color: white;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            font-size: 0.8rem;
-        }
-
-        .faq-item.active .faq-toggle {
+        .faq-item.active .faq-icon {
             transform: rotate(180deg);
         }
 
@@ -149,7 +80,7 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
-            background: var(--input-bg);
+            background: var(--hover-bg);
         }
 
         .faq-item.active .faq-answer {
@@ -157,9 +88,13 @@
         }
 
         .faq-answer-content {
-            padding: 20px;
+            padding: 0 20px 20px 20px;
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-height: 1.8;
+        }
+
+        .faq-answer-content li {
+            margin-bottom: 10px;
         }
 
         .faq-answer-content a {
@@ -172,111 +107,31 @@
             text-decoration: underline;
         }
 
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-secondary);
+        .faq-section {
+            margin-bottom: 40px;
         }
 
-        .empty-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: var(--text-secondary)66;
-        }
-
-        .contact-section {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 40px;
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .contact-section h2 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+        .faq-section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--text-primary);
-        }
-
-        .contact-section p {
-            color: var(--text-secondary);
             margin-bottom: 20px;
-            font-size: 1.1rem;
-        }
-
-        .contact-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 25px;
-            border: 2px solid var(--primary-color);
-            background: transparent;
-            color: var(--primary-color);
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .contact-btn:hover {
-            background: var(--gradient-primary);
-            color: white;
-            transform: translateY(-2px);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
         }
 
         @media (max-width: 768px) {
             .faq-header h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
 
-            .faq-search {
-                flex-direction: column;
-            }
-
-            .faq-question-text {
+            .faq-question {
                 font-size: 0.95rem;
             }
-
-            .contact-buttons {
-                flex-direction: column;
-            }
-
-            .contact-btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        .dark-mode .faq-item,
-        .dark-mode .faq-question,
-        .dark-mode .faq-answer,
-        .dark-mode .contact-section {
-            background: #1e1e1e;
-        }
-
-        .dark-mode .faq-search input {
-            background: #2a2a2a;
-            color: white;
-            border-color: #404040;
-        }
-
-        .highlight {
-            background: var(--primary-color)22;
-            padding: 2px 6px;
-            border-radius: 4px;
         }
     </style>
 </head>
 <body>
-    <!-- Header dan Navigation -->
     <header class="header">
         <nav class="navbar">
             <div class="nav-container">
@@ -295,254 +150,345 @@
 
                 <nav class="nav-menu" id="navMenu">
                     <a href="../index.html" class="nav-link">Home</a>
-                    <a href="../pages/product.html" class="nav-link">Product</a>
-                    <a href="../pages/review.html" class="nav-link">Review</a>
-                    <a href="../pages/contact.html" class="nav-link">Kontak</a>
-                    <a href="../pages/order.html" class="nav-link order-link desktop-order-link">
-                        <i class="fas fa-shopping-cart"></i> Pesananku
+                    <a href="product.html" class="nav-link">Product</a>
+                    <a href="review.html" class="nav-link">Review</a>
+                    <a href="contact.html" class="nav-link">Kontak</a>
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                    <a href="pesananku.html" class="nav-link order-link desktop-order-link">
+                        <i class="fas fa-package"></i> Pesananku
+                    </a>
+                    <a href="../auth/customer-account.html" class="nav-link">
+                        <i class="fas fa-user-circle"></i> Akun
                     </a>
                 </nav>
             </div>
         </nav>
     </header>
 
-    <div class="faq-container">
-        <!-- Header -->
-        <div class="faq-header">
-            <h1><i class="fas fa-question-circle"></i> Pertanyaan yang Sering Diajukan</h1>
-            <p>Temukan jawaban untuk pertanyaan Anda di bawah ini</p>
-        </div>
-
-        <!-- Search -->
-        <div class="faq-search">
-            <input type="text" id="faqSearch" placeholder="Cari pertanyaan..." onkeyup="filterFAQ()">
-        </div>
-
-        <!-- Categories -->
-        <div class="faq-categories">
-            <button class="category-btn active" onclick="filterByCategory('all')">Semua</button>
-            <button class="category-btn" onclick="filterByCategory('pembayaran')">Pembayaran</button>
-            <button class="category-btn" onclick="filterByCategory('pesanan')">Pesanan</button>
-            <button class="category-btn" onclick="filterByCategory('akun')">Akun</button>
-            <button class="category-btn" onclick="filterByCategory('teknis')">Teknis</button>
-            <button class="category-btn" onclick="filterByCategory('lainnya')">Lainnya</button>
-        </div>
-
-        <!-- FAQ Items -->
-        <div class="faq-items" id="faqList"></div>
-
-        <!-- Contact Section -->
-        <div class="contact-section">
-            <h2>Tidak menemukan jawaban?</h2>
-            <p>Hubungi tim customer service kami untuk bantuan lebih lanjut</p>
-            <div class="contact-buttons">
-                <a href="https://wa.me/6281214477714" class="contact-btn" target="_blank">
-                    <i class="fas fa-whatsapp"></i> WhatsApp
-                </a>
-                <a href="../pages/contact.html" class="contact-btn">
-                    <i class="fas fa-envelope"></i> Email
-                </a>
-                <a href="../pages/contact.html" class="contact-btn">
-                    <i class="fas fa-comment"></i> Contact Us
-                </a>
+    <main>
+        <div class="faq-container">
+            <div class="faq-header">
+                <h1>❓ Frequently Asked Questions</h1>
+                <p>Temukan jawaban atas pertanyaan umum tentang DEV ROBLOX SHOP</p>
             </div>
-        </div>
-    </div>
 
-    <script src="../assets/js/loading.js"></script>
-    <script>
-        const faqData = [
-            {
-                id: 1,
-                category: 'pembayaran',
-                icon: 'fa-credit-card',
-                question: 'Apa saja metode pembayaran yang tersedia?',
-                answer: 'Kami menerima berbagai metode pembayaran termasuk <span class="highlight">GoPay</span>, <span class="highlight">DANA</span>, <span class="highlight">OVO</span>, <span class="highlight">ShopeePay</span>, dan <span class="highlight">QRIS</span>. Pembayaran dilakukan melalui WhatsApp untuk keamanan maksimal.'
-            },
-            {
-                id: 2,
-                category: 'pembayaran',
-                icon: 'fa-lock',
-                question: 'Apakah pembayaran aman?',
-                answer: 'Ya, pembayaran kami sangat aman. Kami tidak menyimpan data kartu kredit atau informasi sensitif lainnya. Semua transaksi dilakukan langsung dengan penyedia layanan pembayaran resmi.'
-            },
-            {
-                id: 3,
-                category: 'pembayaran',
-                icon: 'fa-percent',
-                question: 'Apakah ada biaya tambahan?',
-                answer: 'Tidak ada biaya tersembunyi. Harga yang ditampilkan sudah termasuk semua biaya. Namun, biaya admin dari e-wallet Anda sendiri tetap berlaku sesuai kebijakan penyedia layanan.'
-            },
-            {
-                id: 4,
-                category: 'pesanan',
-                icon: 'fa-box',
-                question: 'Berapa lama pesanan diproses?',
-                answer: 'Pesanan biasanya diproses dalam <span class="highlight">1-24 jam</span> kerja. Setelah pembayaran dikonfirmasi, tim kami akan segera memproses pesanan Anda dan memberikan notifikasi melalui WhatsApp.'
-            },
-            {
-                id: 5,
-                category: 'pesanan',
-                icon: 'fa-truck',
-                question: 'Bagaimana cara melacak pesanan saya?',
-                answer: 'Anda dapat melacak pesanan melalui halaman <span class="highlight">"Pesananku"</span> di website. Cukup masukkan ID pesanan atau username Roblox Anda untuk melihat status pesanan secara real-time.'
-            },
-            {
-                id: 6,
-                category: 'pesanan',
-                icon: 'fa-undo',
-                question: 'Apa kebijakan pengembalian dana?',
-                answer: 'Jika pesanan Anda mengalami masalah atau tidak terselesaikan dalam 48 jam, kami akan memberikan pengembalian dana penuh. Hubungi customer service kami melalui WhatsApp untuk proses pengembalian dana.'
-            },
-            {
-                id: 7,
-                category: 'pesanan',
-                icon: 'fa-times-circle',
-                question: 'Apa yang bisa saya lakukan jika pesanan gagal?',
-                answer: 'Jika pesanan gagal, silakan hubungi tim customer service kami segera. Kami akan membantu Anda mengidentifikasi masalahnya dan memberikan solusi terbaik. Jika diperlukan, kami akan memberikan pengembalian dana penuh.'
-            },
-            {
-                id: 8,
-                category: 'akun',
-                icon: 'fa-user',
-                question: 'Bagaimana cara membuat akun?',
-                answer: 'Klik tombol <span class="highlight">"Akun"</span> di navbar, kemudian pilih tab <span class="highlight">"Daftar"</span>. Isi data lengkap Anda, termasuk username Roblox, email, password, dan nomor WhatsApp. Akun Anda akan aktif setelah konfirmasi.'
-            },
-            {
-                id: 9,
-                category: 'akun',
-                icon: 'fa-key',
-                question: 'Bagaimana cara mengubah password?',
-                answer: 'Login ke akun Anda, lalu pergi ke halaman <span class="highlight">"Akun Saya"</span> → <span class="highlight">"Keamanan"</span> → <span class="highlight">"Ubah Password"</span>. Masukkan password lama dan password baru Anda, kemudian klik "Ubah".'
-            },
-            {
-                id: 10,
-                category: 'akun',
-                icon: 'fa-envelope',
-                question: 'Bagaimana cara verifikasi email?',
-                answer: 'Setelah mendaftar, kami akan mengirimkan email verifikasi ke alamat email Anda. Klik link di email tersebut untuk menyelesaikan verifikasi. Jika tidak menerima email, periksa folder spam atau minta kirim ulang dari halaman akun.'
-            },
-            {
-                id: 11,
-                category: 'akun',
-                icon: 'fa-trash',
-                question: 'Bagaimana cara menghapus akun?',
-                answer: 'Anda bisa menghapus akun melalui <span class="highlight">"Akun Saya"</span> → <span class="highlight">"Keamanan"</span> → <span class="highlight">"Hapus Akun"</span>. Perhatian: Tindakan ini tidak dapat dibatalkan dan semua data akan dihapus permanen.'
-            },
-            {
-                id: 12,
-                category: 'teknis',
-                icon: 'fa-gamepad',
-                question: 'Apa itu username Roblox?',
-                answer: 'Username Roblox adalah nama akun Anda di platform Roblox. Anda dapat menemukannya di profil Roblox Anda (www.roblox.com/user/profile). Username ini diperlukan untuk mengirim Robux atau item lainnya ke akun Anda.'
-            },
-            {
-                id: 13,
-                category: 'teknis',
-                icon: 'fa-info-circle',
-                question: 'Bagaimana cara memeriksa username Roblox saya?',
-                answer: 'Pergi ke www.roblox.com, login dengan akun Anda, kemudian klik avatar Anda di sudut kanan atas. Pilih <span class="highlight">"Profile"</span> dan lihat username Anda. Atau gunakan tombol <span class="highlight">"Periksa"</span> di form pemesanan kami untuk validasi cepat.'
-            },
-            {
-                id: 14,
-                category: 'teknis',
-                icon: 'fa-laptop',
-                question: 'Apakah website responsif di mobile?',
-                answer: 'Ya, website kami fully responsive dan bekerja sempurna di semua perangkat mobile. Anda dapat melakukan pemesanan dengan lancar menggunakan smartphone atau tablet.'
-            },
-            {
-                id: 15,
-                category: 'lainnya',
-                icon: 'fa-gift',
-                question: 'Apakah ada kode promo?',
-                answer: 'Ya! Kami menawarkan berbagai kode promo secara berkala. Beberapa contoh: <span class="highlight">SAVE10</span> (10% diskon), <span class="highlight">SAVE20</span> (20% diskon), <span class="highlight">WELCOME</span> (5% diskon untuk member baru). Gunakan kode saat checkout.'
-            },
-            {
-                id: 16,
-                category: 'lainnya',
-                icon: 'fa-star',
-                question: 'Bagaimana cara memberikan review?',
-                answer: 'Klik menu <span class="highlight">"Review"</span> di navbar, isi formulir dengan rating dan komentar Anda tentang pengalaman berbelanja. Review Anda akan membantu customer lain membuat keputusan yang tepat.'
-            }
-        ];
-
-        let currentCategory = 'all';
-
-        function renderFAQ(data = faqData) {
-            const faqList = document.getElementById('faqList');
-            
-            if (data.length === 0) {
-                faqList.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-icon"><i class="fas fa-search"></i></div>
-                        <p>Tidak ada hasil pencarian</p>
-                    </div>
-                `;
-                return;
-            }
-
-            faqList.innerHTML = data.map(faq => `
-                <div class="faq-item" onclick="toggleFAQ(this)">
-                    <div class="faq-question">
-                        <div class="faq-question-text">
-                            <i class="faq-icon fas ${faq.icon}"></i>
-                            <span>${faq.question}</span>
+            <!-- Pembayaran Section -->
+            <div class="faq-section">
+                <h2 class="faq-section-title">💳 Metode Pembayaran</h2>
+                <div class="faq-items">
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Metode pembayaran apa saja yang tersedia?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
-                        <div class="faq-toggle">+</div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Kami menyediakan berbagai metode pembayaran untuk kemudahan Anda:</p>
+                                <ul>
+                                    <li><strong>💬 WhatsApp:</strong> Chat langsung dengan admin untuk konfirmasi pembayaran manual</li>
+                                    <li><strong>🏧 Transfer Bank:</strong> BCA, Mandiri, BNI, CIMB Niaga</li>
+                                    <li><strong>📱 E-Wallet:</strong> DANA, OVO, GoPay, LinkAja</li>
+                                    <li><strong>👆 QRIS:</strong> Scan QR untuk berbagai platform</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">${faq.answer}</div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Apakah pembayaran aman?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Ya, pembayaran Anda aman dan terjamin. Kami tidak menyimpan data kartu kredit Anda. Semua transaksi melalui gateway pembayaran yang tersertifikasi dan aman.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Berapa lama pemrosesan pembayaran?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Pembayaran biasanya diproses dalam beberapa detik hingga menit setelah Anda mengirimkan bukti transfer. Untuk pembayaran manual via WhatsApp, admin akan memverifikasi dalam waktu 1-5 menit.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Bagaimana jika pembayaran gagal?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Jika pembayaran gagal, coba lagi dengan metode lain atau hubungi admin kami via WhatsApp untuk bantuan. Uang Anda tidak akan terdebit jika transaksi gagal.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            `).join('');
-        }
+            </div>
 
+            <!-- Pesanan Section -->
+            <div class="faq-section">
+                <h2 class="faq-section-title">📦 Pesanan & Pengiriman</h2>
+                <div class="faq-items">
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Berapa lama pesanan saya diproses?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p><strong>Waktu Pemrosesan:</strong></p>
+                                <ul>
+                                    <li><strong>Normal:</strong> 1-5 menit (tidak memerlukan verifikasi)</li>
+                                    <li><strong>Dengan Verifikasi:</strong> Hingga 15 menit (jika diperlukan konfirmasi identitas)</li>
+                                </ul>
+                                <p style="margin-top: 10px;">Sistem kami bekerja otomatis, sehingga pesanan Anda akan langsung diproses setelah pembayaran dikonfirmasi.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Bagaimana cara melacak pesanan saya?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Anda dapat melacak pesanan melalui halaman "Pesananku" di dashboard akun. Semua detail pesanan dan status akan ditampilkan di sana. Update status akan diberitahukan secara real-time.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Apa itu verifikasi akun Roblox?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Verifikasi adalah proses untuk memastikan akun Roblox Anda valid dan dapat menerima item/Robux dengan aman. Kami memerlukan username Anda dan kadang memalui verifikasi tambahan untuk mencegah fraud.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Apakah ada garansi uang kembali?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Ya, jika item tidak sampai atau ada masalah dengan pesanan, kami akan memberikan penggantian atau uang kembali 100% (tidak ada potongan). Hubungi admin kami untuk proses klaim.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Akun & Keamanan Section -->
+            <div class="faq-section">
+                <h2 class="faq-section-title">🔐 Akun & Keamanan</h2>
+                <div class="faq-items">
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Apakah data saya aman?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Keamanan data Anda adalah prioritas utama kami. Kami menggunakan enkripsi SSL dan tidak menyimpan data sensitif seperti password dalam format plain text. Semua transaksi dilindungi dengan teknologi keamanan terkini.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Bagaimana cara membuat akun?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Klik tombol "Akun" di halaman utama, lalu pilih "Daftar". Isi informasi yang diperlukan dan ikuti instruksi verifikasi email. Akun Anda akan langsung aktif setelah verifikasi.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Bagaimana jika lupa password?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Klik "Lupa Password" di halaman login. Masukkan email Anda, dan kami akan mengirimkan link reset password. Ikuti link tersebut dan buat password baru Anda.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promo & Diskon Section -->
+            <div class="faq-section">
+                <h2 class="faq-section-title">🎁 Promo & Diskon</h2>
+                <div class="faq-items">
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Bagaimana cara menggunakan kode promo?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Saat melakukan pembelian, ada field "Kode Promo" di halaman checkout. Masukkan kode promo Anda dan diskon akan langsung diterapkan. Setiap kode hanya bisa digunakan sesuai limit yang ditentukan.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Promo apa saja yang sedang berjalan?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Promo terbaru selalu ditampilkan di homepage kami. Bergabunglah dengan group WhatsApp kami untuk mendapatkan notifikasi promo eksklusif dan terbatas!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Bagaimana dengan Flash Sale?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Flash Sale adalah promo spesial dengan diskon besar untuk waktu terbatas. Produk yang participating akan menampilkan badge ⚡ dan countdown timer. Stock terbatas, siapa cepat dia dapat!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produk Section -->
+            <div class="faq-section">
+                <h2 class="faq-section-title">🎮 Produk & Konten</h2>
+                <div class="faq-items">
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Apa perbedaan Robux via Gamepass dan Instant?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <ul>
+                                    <li><strong>Robux via Gamepass:</strong> Lebih hemat, proses 1-5 menit, sistem otomatis</li>
+                                    <li><strong>Robux Instant:</strong> Lebih cepat, proses real-time, harga premium</li>
+                                </ul>
+                                <p style="margin-top: 10px;">Pilih sesuai kebutuhan dan budget Anda!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Apakah akun Roblox dijamin original?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Semua akun Roblox kami 100% original dan dapat diverifikasi. Setiap akun telah dikecek dan dikonfirmasi kevalidannya sebelum dijual.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kontak Section -->
+            <div class="faq-section">
+                <h2 class="faq-section-title">📞 Bantuan & Kontak</h2>
+                <div class="faq-items">
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <span>Bagaimana jika masalah saya tidak ada di FAQ?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Hubungi kami langsung melalui:</p>
+                                <ul>
+                                    <li><strong>💬 WhatsApp:</strong> <a href="https://wa.me/6281214477714">Chat WhatsApp Kami</a></li>
+                                    <li><strong>📷 Instagram DM:</strong> <a href="https://www.instagram.com/devrobloxshop_/">@devrobloxshop_</a></li>
+                                </ul>
+                                <p style="margin-top: 10px;">Respons cepat dan support 24/7!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>DEV ROBLOX SHOP</h4>
+                    <p>Penyedia kebutuhan Roblox terpercaya dan berkualitas</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Beranda</a></li>
+                        <li><a href="product.html">Produk</a></li>
+                        <li><a href="review.html">Review</a></li>
+                        <li><a href="contact.html">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Hubungi Kami</h4>
+                    <p><a href="https://wa.me/6281214477714" class="contact-link">💬 Chat WhatsApp Kami</a></p>
+                    <p><a href="https://www.instagram.com/devrobloxshop_/" class="contact-link">📷 Instagram DM</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Informasi</h4>
+                    <p><a href="faq.html">FAQ</a></p>
+                    <p><a href="legal.html">Syarat & Ketentuan</a></p>
+                    <p><a href="legal.html">Kebijakan Privasi</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 DEV ROBLOX SHOP. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * Toggle FAQ item
+         */
         function toggleFAQ(element) {
             const allItems = document.querySelectorAll('.faq-item');
             allItems.forEach(item => {
-                if (item !== element) item.classList.remove('active');
+                if (item !== element) {
+                    item.classList.remove('active');
+                }
             });
             element.classList.toggle('active');
         }
 
-        function filterByCategory(category) {
-            currentCategory = category;
-            
-            // Update active button
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-
-            // Filter data
-            const filtered = category === 'all' 
-                ? faqData 
-                : faqData.filter(item => item.category === category);
-            
-            renderFAQ(filtered);
-        }
-
-        function filterFAQ() {
-            const searchTerm = document.getElementById('faqSearch').value.toLowerCase();
-            
-            const filtered = faqData.filter(item => {
-                const matchesSearch = item.question.toLowerCase().includes(searchTerm) || 
-                                     item.answer.toLowerCase().includes(searchTerm);
-                const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
-                return matchesSearch && matchesCategory;
-            });
-
-            renderFAQ(filtered);
-        }
-
         // Hamburger menu
-        document.getElementById('hamburger').addEventListener('click', () => {
-            document.getElementById('navMenu').classList.toggle('active');
-        });
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
 
-        // Initial render
-        document.addEventListener('DOMContentLoaded', () => {
-            renderFAQ();
+        hamburger?.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
         });
     </script>
 </body>
