@@ -1,5 +1,41 @@
 // ============ PRODUCT PAGES FUNCTIONALITY ============
 
+// ============ CLICKABLE ITEM SELECTION ============
+document.addEventListener('DOMContentLoaded', function() {
+    // Make robux items fully clickable
+    const robuxItems = document.querySelectorAll('.robux-item');
+    robuxItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            // Don't trigger if clicking directly on radio
+            if (e.target.type === 'radio') return;
+            
+            // Find radio button in this item
+            const radio = this.querySelector('input[type="radio"]');
+            if (radio) {
+                radio.checked = true;
+                
+                // Update UI
+                robuxItems.forEach(i => i.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                // Trigger change event
+                radio.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+        });
+
+        // Also watch for direct radio clicks
+        const radio = item.querySelector('input[type="radio"]');
+        if (radio) {
+            radio.addEventListener('change', function() {
+                robuxItems.forEach(i => i.classList.remove('selected'));
+                if (this.checked) {
+                    item.classList.add('selected');
+                }
+            });
+        }
+    });
+});
+
 // ============ SUCCESS POPUP FUNCTION ============
 function showSuccessPopup(orderId) {
     // Create modal overlay
