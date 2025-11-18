@@ -103,6 +103,8 @@
     align-items: center;
     gap: 15px;
     background: var(--white);
+    flex: 1;
+    min-width: 150px;
 }
 
 .robux-item:hover {
@@ -111,9 +113,17 @@
     box-shadow: 0 4px 12px rgba(0, 71, 171, 0.1);
 }
 
-.robux-item.active {
+.robux-item.selected {
     border-color: var(--secondary-color);
-    background: rgba(0, 71, 171, 0.05);
+    background: rgba(0, 71, 171, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 71, 171, 0.15);
+}
+
+.robux-item.selected .robux-icon,
+.robux-item.selected .robux-info,
+.robux-item input[type="radio"]:checked ~ .robux-icon,
+.robux-item input[type="radio"]:checked ~ .robux-info {
+    color: var(--secondary-color);
 }
 
 .robux-item input[type="radio"] {
@@ -126,11 +136,6 @@
     transform: translateY(-50%);
     accent-color: var(--secondary-color);
     z-index: 10;
-}
-
-.robux-item input[type="radio"]:checked ~ .robux-icon,
-.robux-item input[type="radio"]:checked ~ .robux-info {
-    color: var(--secondary-color);
 }
 
 .robux-icon {
