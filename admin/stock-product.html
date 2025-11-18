@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Stock Product - Toko Roblox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f6fa;
+        }
+
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+        }
+
+        .sidebar-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar-logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-item {
+            padding: 12px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #333;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            color: #333;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .search-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .table-wrapper {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            color: #333;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+            color: #333;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .action-btn.edit {
+            background: #007bff;
+            color: white;
+        }
+
+        .stock-indicator {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .stock-indicator.low {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .stock-indicator.medium {
+            background: #cfe2ff;
+            color: #084298;
+        }
+
+        .stock-indicator.high {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .sidebar-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .nav-item {
+                flex: 1;
+                min-width: 100px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            td, th {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">🎮 Admin</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="./dashboard.html" class="nav-item">📊 Dashboard</a>
+                <a href="./pesanan.html" class="nav-item">📦 Pesanan</a>
+                <a href="./akun-roblox.html" class="nav-item">👤 Akun Roblox</a>
+                <a href="./kode-promo.html" class="nav-item">🎁 Kode Promo</a>
+                <a href="./flash-sale.html" class="nav-item">⚡ Flash Sale</a>
+                <a href="./stock-product.html" class="nav-item active">📦 Stock Product</a>
+                <a href="./pelanggan.html" class="nav-item">👥 Pelanggan</a>
+                <a href="./pengaturan.html" class="nav-item">⚙️ Pengaturan</a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <div>
+                    <h1>📦 Manajemen Stock Product</h1>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Produk</div>
+                    <div class="stat-value" id="totalProducts">0</div>
+                </div>
+                <div class="stat-card" style="border-left-color: #ffc107;">
+                    <div class="stat-label">Stock Rendah</div>
+                    <div class="stat-value" id="lowStock">0</div>
+                </div>
+                <div class="stat-card" style="border-left-color: #28a745;">
+                    <div class="stat-label">Stock Normal</div>
+                    <div class="stat-value" id="normalStock">0</div>
+                </div>
+            </div>
+
+            <!-- Search -->
+            <div class="search-filter">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Cari nama produk...">
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produk</th>
+                            <th>SKU</th>
+                            <th>Harga</th>
+                            <th>Stock Saat Ini</th>
+                            <th>Status Stock</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsBody">
+                        <tr><td colspan="6" class="no-data">Tidak ada data produk</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Stock Modal -->
+    <div class="modal" id="updateStockModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Update Stock</h2>
+                <button class="close-btn" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Produk</label>
+                    <input type="text" id="productName" disabled style="background: #f5f5f5;">
+                </div>
+                <div class="form-group">
+                    <label>Stock Saat Ini</label>
+                    <input type="number" id="currentStock" disabled style="background: #f5f5f5;">
+                </div>
+                <div class="form-group">
+                    <label>Stock Baru</label>
+                    <input type="number" id="newStock" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label>Catatan Perubahan (Opsional)</label>
+                    <input type="text" id="stockNote" placeholder="Contoh: Restock bulan ini">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" style="background: #e9ecef; color: #333;" onclick="closeModal()">Batal</button>
+                <button class="btn btn-primary" onclick="saveStock()">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/order-system.js"></script>
+    <script>
+        // Sample product data
+        const DEFAULT_PRODUCTS = [
+            { id: 1, name: 'Robux 10K', sku: 'RBX-10K', price: 50000, stock: 100 },
+            { id: 2, name: 'Robux 50K', sku: 'RBX-50K', price: 200000, stock: 50 },
+            { id: 3, name: 'Gamepass Premium', sku: 'GP-PREM', price: 100000, stock: 75 },
+            { id: 4, name: 'Gamepass Deluxe', sku: 'GP-DEL', price: 150000, stock: 25 },
+            { id: 5, name: 'Roblox Account', sku: 'ACC-STD', price: 75000, stock: 10 },
+        ];
+
+        const STORAGE_KEY = 'product_stock';
+        let products = [];
+        let editingProductId = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+            setupSearch();
+            updateStats();
+        });
+
+        /**
+         * Load products
+         */
+        function loadProducts() {
+            try {
+                const data = localStorage.getItem(STORAGE_KEY);
+                if (data) {
+                    products = JSON.parse(data);
+                } else {
+                    products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+                    saveProducts();
+                }
+                renderTable();
+                updateStats();
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        }
+
+        /**
+         * Save products
+         */
+        function saveProducts() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+        }
+
+        /**
+         * Update stats
+         */
+        function updateStats() {
+            const lowStockCount = products.filter(p => p.stock < 20).length;
+            const normalStockCount = products.filter(p => p.stock >= 20).length;
+
+            document.getElementById('totalProducts').textContent = products.length;
+            document.getElementById('lowStock').textContent = lowStockCount;
+            document.getElementById('normalStock').textContent = normalStockCount;
+        }
+
+        /**
+         * Setup search
+         */
+        function setupSearch() {
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                const filtered = products.filter(p => 
+                    p.name.toLowerCase().includes(query) ||
+                    p.sku.toLowerCase().includes(query)
+                );
+                renderTable(filtered);
+            });
+        }
+
+        /**
+         * Render table
+         */
+        function renderTable(data = products) {
+            const tbody = document.getElementById('productsBody');
+
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="no-data">Tidak ada data produk</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = data.map(product => {
+                let stockClass = 'high';
+                if (product.stock < 10) stockClass = 'low';
+                else if (product.stock < 30) stockClass = 'medium';
+
+                return `
+                    <tr>
+                        <td><strong>${product.name}</strong></td>
+                        <td>${product.sku}</td>
+                        <td>Rp ${product.price.toLocaleString('id-ID')}</td>
+                        <td>${product.stock} pcs</td>
+                        <td>
+                            <span class="stock-indicator ${stockClass}">
+                                ${stockClass === 'low' ? '⚠️ Low' : stockClass === 'medium' ? '⏱️ Medium' : '✓ High'}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="action-btn edit" onclick="openUpdateModal(${product.id})">Edit</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        /**
+         * Open update modal
+         */
+        function openUpdateModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            editingProductId = productId;
+            document.getElementById('productName').value = product.name;
+            document.getElementById('currentStock').value = product.stock;
+            document.getElementById('newStock').value = product.stock;
+            document.getElementById('stockNote').value = '';
+
+            document.getElementById('updateStockModal').classList.add('active');
+        }
+
+        /**
+         * Save stock
+         */
+        function saveStock() {
+            const newStock = parseInt(document.getElementById('newStock').value);
+            
+            if (isNaN(newStock) || newStock < 0) {
+                alert('Stock harus berupa angka positif!');
+                return;
+            }
+
+            const product = products.find(p => p.id === editingProductId);
+            if (product) {
+                product.stock = newStock;
+                saveProducts();
+                closeModal();
+                renderTable();
+                updateStats();
+                alert('✓ Stock berhasil diperbarui!');
+            }
+        }
+
+        /**
+         * Close modal
+         */
+        function closeModal() {
+            document.getElementById('updateStockModal').classList.remove('active');
+            editingProductId = null;
+        }
+    </script>
+</body>
+</html>

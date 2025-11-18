@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Flash Sale - Toko Roblox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f6fa;
+        }
+
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+        }
+
+        .sidebar-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar-logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-item {
+            padding: 12px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #333;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .search-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .table-wrapper {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            color: #333;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+            color: #333;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .action-btn.edit {
+            background: #007bff;
+            color: white;
+        }
+
+        .action-btn.delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-badge.active {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .status-badge.inactive {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .countdown {
+            font-family: monospace;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .sidebar-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .nav-item {
+                flex: 1;
+                min-width: 100px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            td, th {
+                padding: 10px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">🎮 Admin</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="./dashboard.html" class="nav-item">📊 Dashboard</a>
+                <a href="./pesanan.html" class="nav-item">📦 Pesanan</a>
+                <a href="./akun-roblox.html" class="nav-item">👤 Akun Roblox</a>
+                <a href="./kode-promo.html" class="nav-item">🎁 Kode Promo</a>
+                <a href="./flash-sale.html" class="nav-item active">⚡ Flash Sale</a>
+                <a href="./stock-product.html" class="nav-item">📦 Stock Product</a>
+                <a href="./pelanggan.html" class="nav-item">👥 Pelanggan</a>
+                <a href="./pengaturan.html" class="nav-item">⚙️ Pengaturan</a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <div>
+                    <h1>⚡ Manajemen Flash Sale</h1>
+                </div>
+                <div>
+                    <button class="btn btn-primary" onclick="openAddModal()">➕ Buat Flash Sale</button>
+                </div>
+            </div>
+
+            <!-- Search -->
+            <div class="search-filter">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Cari product...">
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-wrapper">
+                <table id="flashSaleTable">
+                    <thead>
+                        <tr>
+                            <th>Product ID</th>
+                            <th>Label</th>
+                            <th>Mulai</th>
+                            <th>Berakhir</th>
+                            <th>Sisa Waktu</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="flashSaleBody">
+                        <tr><td colspan="7" class="no-data">Tidak ada flash sale</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div class="modal" id="flashSaleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Buat Flash Sale</h2>
+                <button class="close-btn" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="flashSaleForm">
+                    <div class="form-group">
+                        <label>Product ID / Nama</label>
+                        <input type="text" id="productId" placeholder="Contoh: robux-gamepass atau 1" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Label Flash Sale</label>
+                        <input type="text" id="label" placeholder="Contoh: Sale 50%" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Tanggal Mulai</label>
+                            <input type="datetime-local" id="startTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tanggal Berakhir</label>
+                            <input type="datetime-local" id="endTime" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Keterangan (Opsional)</label>
+                        <textarea id="description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" style="background: #e9ecef; color: #333;" onclick="closeModal()">Batal</button>
+                <button class="btn btn-primary" onclick="saveFlashSale()">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/flash-sale-system.js"></script>
+    <script>
+        // Data storage
+        const STORAGE_KEY = 'flash_sales_admin';
+        let flashSales = [];
+        let editingId = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFlashSales();
+            setupSearch();
+            setupAutoUpdate();
+        });
+
+        /**
+         * Load flash sales
+         */
+        function loadFlashSales() {
+            try {
+                const data = localStorage.getItem(STORAGE_KEY);
+                flashSales = data ? JSON.parse(data) : [];
+                renderTable();
+            } catch (error) {
+                console.error('Error loading flash sales:', error);
+            }
+        }
+
+        /**
+         * Save flash sales
+         */
+        function saveFlashSales() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(flashSales));
+        }
+
+        /**
+         * Setup search
+         */
+        function setupSearch() {
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                const filtered = flashSales.filter(fs => fs.productId.toLowerCase().includes(query));
+                renderTable(filtered);
+            });
+        }
+
+        /**
+         * Render table
+         */
+        function renderTable(data = flashSales) {
+            const tbody = document.getElementById('flashSaleBody');
+
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="no-data">Tidak ada flash sale</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = data.map(sale => {
+                const now = new Date().getTime();
+                const end = new Date(sale.endTime).getTime();
+                const isActive = now < end;
+                const status = isActive ? 'active' : 'inactive';
+                const statusText = isActive ? '⚡ Active' : '✓ Selesai';
+
+                // Calculate remaining time
+                const remaining = Math.max(0, end - now);
+                const hours = Math.floor((remaining / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((remaining / (1000 * 60)) % 60);
+                const seconds = Math.floor((remaining / 1000) % 60);
+                const timeStr = `${hours}h ${minutes}m ${seconds}s`;
+
+                return `
+                    <tr>
+                        <td><strong>${sale.productId}</strong></td>
+                        <td>${sale.label}</td>
+                        <td>${new Date(sale.startTime).toLocaleString('id-ID')}</td>
+                        <td>${new Date(sale.endTime).toLocaleString('id-ID')}</td>
+                        <td><span class="countdown">${timeStr}</span></td>
+                        <td><span class="status-badge ${status}">${statusText}</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn edit" onclick="editFlashSale('${sale.id}')">Edit</button>
+                                <button class="action-btn delete" onclick="deleteFlashSale('${sale.id}')">Hapus</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        /**
+         * Auto update countdown
+         */
+        function setupAutoUpdate() {
+            setInterval(() => {
+                renderTable();
+            }, 1000);
+        }
+
+        /**
+         * Open add modal
+         */
+        function openAddModal() {
+            editingId = null;
+            document.querySelector('.modal-header h2').textContent = 'Buat Flash Sale';
+            document.getElementById('flashSaleForm').reset();
+            
+            // Set default times
+            const now = new Date();
+            const start = new Date(now.getTime() + 5 * 60000); // +5 min
+            const end = new Date(now.getTime() + 65 * 60000); // +65 min
+            
+            document.getElementById('startTime').value = start.toISOString().slice(0, 16);
+            document.getElementById('endTime').value = end.toISOString().slice(0, 16);
+            
+            document.getElementById('flashSaleModal').classList.add('active');
+        }
+
+        /**
+         * Edit flash sale
+         */
+        function editFlashSale(id) {
+            const sale = flashSales.find(fs => fs.id === id);
+            if (!sale) return;
+
+            editingId = id;
+            document.querySelector('.modal-header h2').textContent = 'Edit Flash Sale';
+            document.getElementById('productId').value = sale.productId;
+            document.getElementById('label').value = sale.label;
+            document.getElementById('startTime').value = new Date(sale.startTime).toISOString().slice(0, 16);
+            document.getElementById('endTime').value = new Date(sale.endTime).toISOString().slice(0, 16);
+            document.getElementById('description').value = sale.description || '';
+
+            document.getElementById('flashSaleModal').classList.add('active');
+        }
+
+        /**
+         * Save flash sale
+         */
+        function saveFlashSale() {
+            const productId = document.getElementById('productId').value.trim();
+            const label = document.getElementById('label').value.trim();
+            const startTime = document.getElementById('startTime').value;
+            const endTime = document.getElementById('endTime').value;
+            const description = document.getElementById('description').value.trim();
+
+            if (!productId || !label || !startTime || !endTime) {
+                alert('Semua field wajib diisi!');
+                return;
+            }
+
+            if (new Date(endTime) <= new Date(startTime)) {
+                alert('Waktu berakhir harus lebih besar dari waktu mulai!');
+                return;
+            }
+
+            if (editingId) {
+                const sale = flashSales.find(fs => fs.id === editingId);
+                if (sale) {
+                    Object.assign(sale, { productId, label, startTime, endTime, description });
+                }
+            } else {
+                flashSales.push({
+                    id: 'FS-' + Date.now(),
+                    productId,
+                    label,
+                    startTime,
+                    endTime,
+                    description,
+                    createdAt: new Date().toISOString()
+                });
+            }
+
+            saveFlashSales();
+            closeModal();
+            renderTable();
+            alert('✓ Flash sale berhasil disimpan!');
+        }
+
+        /**
+         * Delete flash sale
+         */
+        function deleteFlashSale(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus flash sale ini?')) {
+                flashSales = flashSales.filter(fs => fs.id !== id);
+                saveFlashSales();
+                renderTable();
+                alert('✓ Flash sale berhasil dihapus!');
+            }
+        }
+
+        /**
+         * Close modal
+         */
+        function closeModal() {
+            document.getElementById('flashSaleModal').classList.remove('active');
+            editingId = null;
+        }
+    </script>
+</body>
+</html>

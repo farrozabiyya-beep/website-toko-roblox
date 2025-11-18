@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Kode Promo - Toko Roblox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f6fa;
+        }
+
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+        }
+
+        .sidebar-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar-logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-item {
+            padding: 12px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #333;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .search-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .table-wrapper {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            color: #333;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+            color: #333;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .action-btn.edit {
+            background: #007bff;
+            color: white;
+        }
+
+        .action-btn.delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-badge.active {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .status-badge.expired {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .sidebar-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .nav-item {
+                flex: 1;
+                min-width: 100px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            td, th {
+                padding: 10px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">🎮 Admin</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="./dashboard.html" class="nav-item">📊 Dashboard</a>
+                <a href="./pesanan.html" class="nav-item">📦 Pesanan</a>
+                <a href="./akun-roblox.html" class="nav-item">👤 Akun Roblox</a>
+                <a href="./kode-promo.html" class="nav-item active">🎁 Kode Promo</a>
+                <a href="./flash-sale.html" class="nav-item">⚡ Flash Sale</a>
+                <a href="./stock-product.html" class="nav-item">📦 Stock Product</a>
+                <a href="./pelanggan.html" class="nav-item">👥 Pelanggan</a>
+                <a href="./pengaturan.html" class="nav-item">⚙️ Pengaturan</a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <div>
+                    <h1>🎁 Manajemen Kode Promo</h1>
+                </div>
+                <div>
+                    <button class="btn btn-primary" onclick="openAddModal()">➕ Tambah Promo</button>
+                </div>
+            </div>
+
+            <!-- Search -->
+            <div class="search-filter">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Cari kode promo...">
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-wrapper">
+                <table id="promoTable">
+                    <thead>
+                        <tr>
+                            <th>Kode</th>
+                            <th>Diskon</th>
+                            <th>Tipe</th>
+                            <th>Berlaku Hingga</th>
+                            <th>Limit Penggunaan</th>
+                            <th>Terpakai</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="promoBody">
+                        <tr><td colspan="8" class="no-data">Tidak ada data promo</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div class="modal" id="promoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Tambah Kode Promo</h2>
+                <button class="close-btn" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="promoForm">
+                    <div class="form-group">
+                        <label>Kode Promo</label>
+                        <input type="text" id="code" placeholder="Contoh: PROMO2025" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Tipe Diskon</label>
+                            <select id="discountType" required onchange="updateDiscountInput()">
+                                <option value="percentage">Persentase (%)</option>
+                                <option value="fixed">Nominal (Rp)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Jumlah Diskon</label>
+                            <input type="number" id="discountValue" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Tanggal Mulai</label>
+                            <input type="date" id="startDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tanggal Berakhir</label>
+                            <input type="date" id="endDate" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Limit Penggunaan</label>
+                        <input type="number" id="usageLimit" placeholder="Kosongkan untuk unlimited">
+                    </div>
+                    <div class="form-group">
+                        <label>Minimum Pembelian (Rp)</label>
+                        <input type="number" id="minPurchase" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Keterangan</label>
+                        <textarea id="description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" style="background: #e9ecef; color: #333;" onclick="closeModal()">Batal</button>
+                <button class="btn btn-primary" onclick="savePromo()">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data storage
+        const STORAGE_KEY = 'promo_codes';
+        let promos = [];
+        let editingId = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPromos();
+            setupSearch();
+        });
+
+        /**
+         * Load promos
+         */
+        function loadPromos() {
+            try {
+                const data = localStorage.getItem(STORAGE_KEY);
+                promos = data ? JSON.parse(data) : [];
+                renderTable();
+            } catch (error) {
+                console.error('Error loading promos:', error);
+            }
+        }
+
+        /**
+         * Save promos
+         */
+        function savePromos() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(promos));
+        }
+
+        /**
+         * Setup search
+         */
+        function setupSearch() {
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                const filtered = promos.filter(p => p.code.toLowerCase().includes(query));
+                renderTable(filtered);
+            });
+        }
+
+        /**
+         * Update discount input
+         */
+        function updateDiscountInput() {
+            const type = document.getElementById('discountType').value;
+            const label = type === 'percentage' ? 'Persentase (%)' : 'Nominal (Rp)';
+            document.querySelector('label[for="discountValue"]').textContent = label;
+        }
+
+        /**
+         * Render table
+         */
+        function renderTable(data = promos) {
+            const tbody = document.getElementById('promoBody');
+
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="no-data">Tidak ada data promo</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = data.map(promo => {
+                const endDate = new Date(promo.endDate);
+                const isExpired = endDate < new Date();
+                const status = isExpired ? 'expired' : 'active';
+                const statusText = isExpired ? 'Expired' : 'Aktif';
+
+                return `
+                    <tr>
+                        <td><strong>${promo.code}</strong></td>
+                        <td>${promo.discountType === 'percentage' ? promo.discountValue + '%' : 'Rp ' + promo.discountValue.toLocaleString('id-ID')}</td>
+                        <td>${promo.discountType === 'percentage' ? 'Persentase' : 'Nominal'}</td>
+                        <td>${new Date(promo.endDate).toLocaleDateString('id-ID')}</td>
+                        <td>${promo.usageLimit || '∞'}</td>
+                        <td>${promo.usageCount || 0}</td>
+                        <td><span class="status-badge ${status}">${statusText}</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn edit" onclick="editPromo('${promo.id}')">Edit</button>
+                                <button class="action-btn delete" onclick="deletePromo('${promo.id}')">Hapus</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        /**
+         * Open add modal
+         */
+        function openAddModal() {
+            editingId = null;
+            document.querySelector('.modal-header h2').textContent = 'Tambah Kode Promo';
+            document.getElementById('promoForm').reset();
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('startDate').value = today;
+            document.getElementById('promoModal').classList.add('active');
+        }
+
+        /**
+         * Edit promo
+         */
+        function editPromo(id) {
+            const promo = promos.find(p => p.id === id);
+            if (!promo) return;
+
+            editingId = id;
+            document.querySelector('.modal-header h2').textContent = 'Edit Kode Promo';
+            document.getElementById('code').value = promo.code;
+            document.getElementById('discountType').value = promo.discountType;
+            document.getElementById('discountValue').value = promo.discountValue;
+            document.getElementById('startDate').value = promo.startDate.split('T')[0];
+            document.getElementById('endDate').value = promo.endDate.split('T')[0];
+            document.getElementById('usageLimit').value = promo.usageLimit || '';
+            document.getElementById('minPurchase').value = promo.minPurchase || 0;
+            document.getElementById('description').value = promo.description || '';
+
+            document.getElementById('promoModal').classList.add('active');
+        }
+
+        /**
+         * Save promo
+         */
+        function savePromo() {
+            const code = document.getElementById('code').value.trim().toUpperCase();
+            const discountType = document.getElementById('discountType').value;
+            const discountValue = parseFloat(document.getElementById('discountValue').value);
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const usageLimit = parseInt(document.getElementById('usageLimit').value) || null;
+            const minPurchase = parseFloat(document.getElementById('minPurchase').value) || 0;
+            const description = document.getElementById('description').value.trim();
+
+            if (!code || !discountValue || !startDate || !endDate) {
+                alert('Semua field wajib diisi!');
+                return;
+            }
+
+            if (new Date(endDate) <= new Date(startDate)) {
+                alert('Tanggal berakhir harus lebih besar dari tanggal mulai!');
+                return;
+            }
+
+            if (editingId) {
+                const promo = promos.find(p => p.id === editingId);
+                if (promo) {
+                    Object.assign(promo, { code, discountType, discountValue, startDate, endDate, usageLimit, minPurchase, description });
+                }
+            } else {
+                promos.push({
+                    id: 'PROMO-' + Date.now(),
+                    code,
+                    discountType,
+                    discountValue,
+                    startDate,
+                    endDate,
+                    usageLimit,
+                    minPurchase,
+                    description,
+                    usageCount: 0,
+                    createdAt: new Date().toISOString()
+                });
+            }
+
+            savePromos();
+            closeModal();
+            renderTable();
+            alert('✓ Promo berhasil disimpan!');
+        }
+
+        /**
+         * Delete promo
+         */
+        function deletePromo(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus promo ini?')) {
+                promos = promos.filter(p => p.id !== id);
+                savePromos();
+                renderTable();
+                alert('✓ Promo berhasil dihapus!');
+            }
+        }
+
+        /**
+         * Close modal
+         */
+        function closeModal() {
+            document.getElementById('promoModal').classList.remove('active');
+            editingId = null;
+        }
+    </script>
+</body>
+</html>
